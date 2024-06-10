@@ -1,18 +1,23 @@
 #!/bin/bash
 
+# Define the job name variable
 JOB_NAME="pythia-160m"
 
-#$ -N $JOB_NAME
-#$ -o /exports/eddie/scratch/s2558433/${JOB_NAME}_$JOB_ID.log
-#$ -e /exports/eddie/scratch/s2558433/${JOB_NAME}_$JOB_ID.err
+# Use the variable for the job name and log/error files
+#$ -N pythia-160m
+#$ -o /exports/eddie/scratch/s2558433/pythia-160m_$JOB_ID.log
+#$ -e /exports/eddie/scratch/s2558433/pythia-160m_$JOB_ID.err
 #$ -cwd
 #$ -pe sharedmem 16
 #$ -l h_vmem=4G
 #$ -l h_rt=48:00:00
 
-# Create /activate conda env if it doesn't exist
-source /exports/eddie/scratch/s2558433/miniconda3/etc/profile.d/conda.sh
+# Set the Hugging Face cache directory to the scratch space
+export HF_HOME="/exports/eddie/scratch/s2558433/huggingface_cache"
+export TRANSFORMERS_CACHE="/exports/eddie/scratch/s2558433/huggingface_cache/transformers"
+export HF_DATASETS_CACHE="/exports/eddie/scratch/s2558433/huggingface_cache/datasets"
 
+# Create / activate conda env if it doesn't exist
 
 cd /exports/eddie/scratch/s2558433/
 #conda remove --name extract --all
@@ -25,13 +30,8 @@ cd ArchitectureExtraction
 
 #pip install -r requirements.txt
 
-
 # Run the main script
 python main.py --N 1000 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model2 EleutherAI/pythia-160m --corpus-path monology/pile-uncopyrighted
-#python main.py --N 1000 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model2 EleutherAI/pythia-410m --corpus-path monology/pile-uncopyrighted
-#python main.py --N 1000 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model2 EleutherAI/pythia-1b --corpus-path monology/pile-uncopyrighted
-#python main.py --N 1000 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model2 EleutherAI/pythia-1.4b --corpus-path monology/pile-uncopyrighted
-#python main.py --N 1000 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model2 EleutherAI/pythia-2.8b --corpus-path monology/pile-uncopyrighted
+#python main.py --N 1000 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model2 EleutherAI/pythia-410m --cor
 
-conda deactivate
-
+conda deactivate 
