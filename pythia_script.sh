@@ -18,7 +18,7 @@ cd /exports/eddie/scratch/s2558433/
 
 conda activate extracted-1b
 
-cd base_extraction_implementaion
+cd ArchitectureExtraction
 
 pip install -r requirements.txt
 
