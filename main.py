@@ -7,8 +7,7 @@ import csv
 from datasets import load_dataset
 from transformers import GPTNeoXForCausalLM, AutoTokenizer
 from tqdm import tqdm
-from model_utils import calculate_perplexity, print_best, device
-from extraction import parse_pilecorpus
+from model_utils import calculate_perplexity, print_best, parse_pilecorpus, device
 
 def main(args):
     print(f"Using device: {device}")
@@ -16,7 +15,7 @@ def main(args):
     path="monology/pile-uncopyrighted"
     ds= parse_pilecorpus(path)
     print("Length:", len(ds))
-
+   
     seq_len = 256
     top_k = 40
 
@@ -32,6 +31,7 @@ def main(args):
     model2.eval()
 
     samples = []
+    prompts_list = []
     scores = {"XL": [], "S": [], "Lower": [], "zlib": []}
 
     num_batches = int(np.ceil(args.N / args.batch_size))
@@ -45,8 +45,8 @@ def main(args):
             while len(input_ids) < args.batch_size:
                 # Sample random text from the Pile corpus
                 r = np.random.randint(0, len(ds))
-                prompt = " ".join(ds[r].split()[:100])
-
+                # prompt = " ".join(ds[r].split()[:100])
+                prompt = " ".join(ds[r:r+100].split(" ")[1:-1])
                 # Tokenize the prompt ensuring consistent input lengths
                 inputs = tokenizer(prompt, return_tensors="pt", max_length=input_len, truncation=True, padding="max_length")
                 if len(inputs['input_ids'][0]) == input_len:
@@ -58,10 +58,7 @@ def main(args):
 
             # The actual truncated prompts
             prompts = tokenizer.batch_decode(inputs['input_ids'], skip_special_tokens=True)
-            
-            print("Length of prompt tensor:", len(inputs))    
-            print(inputs)
-            print("Input IDs shape:", inputs['input_ids'].shape)
+ 
             print("Attention Mask shape:", inputs['attention_mask'].shape)
 
             output_sequences = model1.generate(
@@ -74,7 +71,7 @@ def main(args):
             )
 
             texts = tokenizer.batch_decode(output_sequences, skip_special_tokens=True)
-
+            prompts_list.append(prompts)
             for text in texts:
                 p1 = calculate_perplexity(text, model1, tokenizer)
                 p2 = calculate_perplexity(text, model2, tokenizer)
@@ -82,13 +79,15 @@ def main(args):
                 zlib_entropy = len(zlib.compress(bytes(text, 'utf-8')))
 
                 samples.append(text)
+                prompts_list.append(prompts)
                 scores["XL"].append(p1)
                 scores["S"].append(p2)
                 scores["Lower"].append(p_lower)
                 scores["zlib"].append(zlib_entropy)
 
             pbar.update(args.batch_size)
-
+    print("*"*100)
+    print("Prompt List has the following prompts:",prompts_list[0])
     scores["XL"] = np.asarray(scores["XL"])
     scores["S"] = np.asarray(scores["S"])
     scores["Lower"] = np.asarray(scores["Lower"])
@@ -99,11 +98,11 @@ def main(args):
     
     output_csv = f'output_scores_{model1_name}_{model2_name}.csv'
     with open(output_csv, 'w', newline='') as csvfile:
-        fieldnames = ['sample', 'PPL_XL', 'PPL_S', 'PPL_Lower', 'Zlib']
+        fieldnames = ['sample', 'prompt','PPL_XL', 'PPL_S', 'PPL_Lower', 'Zlib']
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         writer.writeheader()
-        for sample, xl, s, lower, zlib_ in zip(samples, scores["XL"], scores["S"], scores["Lower"], scores["zlib"]):
-            writer.writerow({'sample': sample, 'PPL_XL': xl, 'PPL_S': s, 'PPL_Lower': lower, 'Zlib': zlib_})
+        for sample, prompt, xl, s, lower, zlib_ in zip(samples, prompts_list[0], scores["XL"], scores["S"], scores["Lower"], scores["zlib"]):
+            writer.writerow({'sample': sample, 'prompt': prompt,'PPL_XL': xl, 'PPL_S': s, 'PPL_Lower': lower, 'Zlib': zlib_})
 
     print("Results saved to ", output_csv)
 
