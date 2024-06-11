@@ -14,6 +14,8 @@ JOB_NAME="pythia-160m"
 
 # Create / activate conda env if it doesn't exist
 
+source /exports/eddie/scratch/s2558433/miniconda3/etc/profile.d/conda.sh
+
 cd /exports/eddie/scratch/s2558433/
 #conda remove --name extract --all
 
