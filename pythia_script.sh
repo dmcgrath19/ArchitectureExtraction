@@ -12,11 +12,6 @@ JOB_NAME="pythia-160m"
 #$ -l h_vmem=4G
 #$ -l h_rt=48:00:00
 
-# Set the Hugging Face cache directory to the scratch space
-export HF_HOME="/exports/eddie/scratch/s2558433/huggingface_cache"
-export TRANSFORMERS_CACHE="/exports/eddie/scratch/s2558433/huggingface_cache/transformers"
-export HF_DATASETS_CACHE="/exports/eddie/scratch/s2558433/huggingface_cache/datasets"
-
 # Create / activate conda env if it doesn't exist
 
 cd /exports/eddie/scratch/s2558433/

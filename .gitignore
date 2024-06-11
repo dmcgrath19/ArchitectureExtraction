@@ -2,3 +2,4 @@ Results/*
 *.log
 *.txt
 *.csv
+*.err
