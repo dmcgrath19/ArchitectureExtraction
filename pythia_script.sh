@@ -20,6 +20,7 @@ cd /exports/eddie/scratch/s2558433/
 #conda remove --name extract --all
 
 #conda create -n extracted-1b python=3.9 
+conda create -n extracted python=3.9 
 
 conda activate extracted-1b
 

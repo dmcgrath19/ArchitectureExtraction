@@ -1,6 +1,14 @@
 torch
+torchvision
+torchaudio
 transformers
 numpy
 tqdm
 zstandard
 datasets
+scipy
+tokenizers
+pandas
+accelerate
+causal-conv1d>=1.2.0
+mamba-ssm
