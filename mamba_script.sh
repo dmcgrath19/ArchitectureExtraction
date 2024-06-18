@@ -20,21 +20,15 @@ export HF_DATASETS_CACHE="/exports/eddie/scratch/s2558433/huggingface_cache/data
 
 source /exports/eddie/scratch/s2558433/miniconda3/etc/profile.d/conda.sh
 
-cd /exports/eddie/scratch/s2558433/
+cd /exports/eddie/scratch/s2558433/ArchitectureExtraction/
 #conda remove --name extract --all
 
-conda create -n mamba python=3.9 
-
 conda activate mamba
-
-cd ArchitectureExtraction
-
-git pull
 
 pip install -r requirements.txt
 
 # Run the main script
-python main.py --N 1000 --batch-size 10 --model1 state-spaces/mamba-2.8b --model2 state-spaces/mamba-130m --corpus-path monology/pile-uncopyrighted
+python main.py --N 1 --batch-size 10 --model1 state-spaces/mamba-2.8b --model2 state-spaces/mamba-130m --corpus-path monology/pile-uncopyrighted
 #python main.py --N 1000 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model2 EleutherAI/pythia-410m --cor
 
 conda deactivate 
