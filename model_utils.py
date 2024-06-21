@@ -16,6 +16,8 @@ def parse_pilecorpus(path):
     Quick and ugly parsing of a WET file.
     Tested for the May 2021 crawl.
     """
+    #TODO: add this so it works for the-pile-splitted ex: ds = load_dataset("ArmelR/the-pile-splitted", "ArXiv")
+
     
     all_texts = ""
     dataset = load_dataset(path, split="train", streaming=True)

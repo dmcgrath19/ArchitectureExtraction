@@ -136,6 +136,7 @@ def parse_arguments(argv):
     parser.add_argument('--model1', type=str, required=True, help="Hugging Face model name for the first model")
     parser.add_argument('--model2', type=str, required=True, help="Hugging Face model name for the second model")
     parser.add_argument('--corpus-path', type=str, required=True, help="Path to the corpus dataset")
+    parser.add_argument('corpus-subset', type=str, required=False, help="data subset if using splitted data")
     parser.add_argument('--name-tag', type=str, required=False, help="Path to the corpus dataset")
 
     return parser.parse_args(argv)
