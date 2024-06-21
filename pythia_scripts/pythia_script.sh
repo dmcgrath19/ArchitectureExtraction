@@ -5,8 +5,8 @@ JOB_NAME="pythia-160m"
 
 # Use the variable for the job name and log/error files
 #$ -N pythia-160m
-#$ -o /exports/eddie/scratch/s2558433/pythia-160m_$JOB_ID.log
-#$ -e /exports/eddie/scratch/s2558433/pythia-160m_$JOB_ID.err
+#$ -o /exports/eddie/scratch/s2558433/job_runs/pythia-160m_$JOB_ID.log
+#$ -e /exports/eddie/scratch/s2558433/job_runs/pythia-160m_$JOB_ID.err
 #$ -cwd
 #$ -pe sharedmem 16
 #$ -l h_vmem=4G

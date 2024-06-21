@@ -1,8 +1,8 @@
 #!/bin/bash
 
 #$ -N cpu-mamba-160mm
-#$ -o /exports/eddie/scratch/s2558433/job_runs/cpu-mamba-ex-160m_$JOB_ID.log
-#$ -e /exports/eddie/scratch/s2558433/job_runs/cpu-mamba-ex-160m_$JOB_ID.err
+#$ -o /exports/eddie/scratch/s2558433/job_runs/cpu-mamba-160m_$JOB_ID.log
+#$ -e /exports/eddie/scratch/s2558433/job_runs/cpu-mamba-160m_$JOB_ID.err
 #$ -cwd
 #$ -pe sharedmem 16
 #$ -l h_vmem=8G
@@ -18,13 +18,19 @@ export HF_DATASETS_CACHE="/exports/eddie/scratch/s2558433/.cache/huggingface_dat
 
 source /exports/eddie/scratch/s2558433/miniconda3/etc/profile.d/conda.sh
 
-cd /exports/eddie/scratch/s2558433/
+cd /exports/eddie/scratch/s2558433/ArchitectureExtraction
 
-conda activate extracted
+conda create -n mamba-fun python=3.9 
 
-cd ArchitectureExtraction
+conda activate mamba-fun
+
+pip install -r requirements.txt
+
+pip install causal-conv1d>=1.2.0
+pip install mamba-ssm
 
 python main.py --N 1000 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-130m-hf --corpus-path monology/pile-uncopyrighted
 
 
 conda deactivate
+

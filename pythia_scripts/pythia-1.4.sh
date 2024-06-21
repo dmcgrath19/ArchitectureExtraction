@@ -1,7 +1,7 @@
 #!/bin/bash
 #$ -N pythia-1.4b
-#$ -o /exports/eddie/scratch/s2558433/pythia-1.4b_$JOB_ID.log
-#$ -e /exports/eddie/scratch/s2558433/pythia-1.4b_$JOB_ID.err
+#$ -o /exports/eddie/scratch/s2558433/job_runs/pythia-1.4b_$JOB_ID.log
+#$ -e /exports/eddie/scratch/s2558433/job_runs/pythia-1.4b_$JOB_ID.err
 #$ -cwd
 #$ -pe sharedmem 16
 #$ -l h_vmem=4G
