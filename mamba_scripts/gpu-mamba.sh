@@ -16,7 +16,6 @@ export TRANSFORMERS_CACHE="/exports/eddie/scratch/s2558433/.cache/huggingface_ca
 export HF_DATASETS_CACHE="/exports/eddie/scratch/s2558433/.cache/huggingface_cache/datasets"
 export PIP_CACHE_DIR="/exports/eddie/scratch/s2558433/.cache/pip"
 export CONDA_PKGS_DIRS="/exports/eddie/scratch/s2558433/.cache/conda_pkgs"
-export HF_DATASETS_CACHE="/exports/eddie/scratch/s2558433/.cache/huggingface_datasets"
 
 . /etc/profile.d/modules.sh
 module load cuda
