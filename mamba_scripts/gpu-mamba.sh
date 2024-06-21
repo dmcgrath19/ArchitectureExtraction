@@ -32,7 +32,7 @@ pip install mamba-ssm
 pip install -r requirements.txt
 
 # Run the main script
-python main.py --N 1000 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-130m-hf --corpus-path monology/pile-uncopyrighted
+python main.py --N 1000 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-130m-hf --corpus-path monology/pile-uncopyrighted --name-tag gpu-trial-with-downloads
 
 conda deactivate
 
