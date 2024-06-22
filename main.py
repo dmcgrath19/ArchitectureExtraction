@@ -90,10 +90,10 @@ def main(args):
     print("Prompt List has the following prompts:",prompts_list[0])
 
     if scores["XL"].device.type == 'cuda':
-        scores["XL"] = scores["XL"].cpu().numpy()
-        scores["S"] = scores["S"].cpu().numpy()
-        scores["Lower"] = scores["Lower"].cpu().numpy()
-        scores["zlib"] = scores["zlib"].cpu().numpy()
+        scores["XL"] = scores["XL"].detach().cpu().numpy()
+        scores["S"] = scores["S"].detach().cpu().numpy()
+        scores["Lower"] = scores["Lower"].detach().cpu().numpy()
+        scores["zlib"] = scores["zlib"].detach().cpu().numpy()
     elif scores["XL"].device.type == 'cpu':
         scores["XL"] = np.asarray(scores["XL"])
         scores["S"] = np.asarray(scores["S"])
@@ -101,6 +101,7 @@ def main(args):
         scores["zlib"] = np.asarray(scores["zlib"])
     else:
         raise RuntimeError("Unknown device type encountered.")
+
 
     
 
