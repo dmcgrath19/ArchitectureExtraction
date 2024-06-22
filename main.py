@@ -89,12 +89,7 @@ def main(args):
     print("*"*100)
     print("Prompt List has the following prompts:",prompts_list[0])
 
-    if isinstance(scores["XL"], list):  # Assuming scores["XL"] is a list of tensors
-        scores["XL"] = [t.detach().cpu().numpy() for t in scores["XL"]]
-        scores["S"] = [t.detach().cpu().numpy() for t in scores["S"]]
-        scores["Lower"] = [t.detach().cpu().numpy() for t in scores["Lower"]]
-        scores["zlib"] = [t.detach().cpu().numpy() for t in scores["zlib"]]
-    elif isinstance(scores["XL"], torch.Tensor):  # Assuming scores["XL"] is a single tensor
+    try:
         if scores["XL"].device.type == 'cuda':
             scores["XL"] = scores["XL"].detach().cpu().numpy()
             scores["S"] = scores["S"].detach().cpu().numpy()
@@ -107,8 +102,8 @@ def main(args):
             scores["zlib"] = np.asarray(scores["zlib"])
         else:
             raise RuntimeError("Unknown device type encountered.")
-    else:
-        raise TypeError("scores['XL'] should be either a list of tensors or a single tensor")
+    except Exception as e:
+        print(f"Error occurred: {e}")
 
 
     
