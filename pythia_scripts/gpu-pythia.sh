@@ -22,12 +22,12 @@ source /exports/eddie/scratch/s2558433/miniconda3/etc/profile.d/conda.sh
 cd /exports/eddie/scratch/s2558433/ArchitectureExtraction/
 #conda remove --name extract --all
 
-#conda create -n extracted-1b python=3.9 
+conda create -n pythia python=3.9 
 
-conda activate extract
+conda activate pythia
 
 
-#pip install -r requirements.txt
+pip install -r requirements.txt
 
 # Run the main script
 python pythia-main.py --N 10 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model2 EleutherAI/pythia-160m --corpus-path monology/pile-uncopyrighted
