@@ -87,7 +87,8 @@ def main(args):
 
             pbar.update(args.batch_size)
     print("*"*100)
-    print("Prompt List has the following prompt
+    print("Prompt List has the following prompts:",prompts_list[0])
+
     if isinstance(scores["XL"], list):  # Assuming scores["XL"] is a list of tensors
         scores["XL"] = [t.detach().cpu().numpy() for t in scores["XL"]]
         scores["S"] = [t.detach().cpu().numpy() for t in scores["S"]]
