@@ -19,17 +19,15 @@ export CONDA_PKGS_DIRS="/exports/eddie/scratch/s2558433/.cache/conda_pkgs"
 
 source /exports/eddie/scratch/s2558433/miniconda3/etc/profile.d/conda.sh
 
-cd /exports/eddie/scratch/s2558433/
+cd /exports/eddie/scratch/s2558433/ArchitectureExtraction/
 #conda remove --name extract --all
 
 #conda create -n extracted-1b python=3.9 
-conda create -n extracted python=3.9 
 
-conda activate extracted-1b
+conda activate extract
 
-cd ArchitectureExtraction
 
-pip install -r requirements.txt
+#pip install -r requirements.txt
 
 # Run the main script
 python main.py --N 1000 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model2 EleutherAI/pythia-160m --corpus-path monology/pile-uncopyrighted
