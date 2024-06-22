@@ -17,6 +17,10 @@ export HF_DATASETS_CACHE="/exports/eddie/scratch/s2558433/.cache/huggingface_cac
 export PIP_CACHE_DIR="/exports/eddie/scratch/s2558433/.cache/pip"
 export CONDA_PKGS_DIRS="/exports/eddie/scratch/s2558433/.cache/conda_pkgs"
 
+export CXXFLAGS="-std=c99"
+export CFLAGS="-std=c99"
+export TOKENIZERS_PARALLELISM=false
+
 . /etc/profile.d/modules.sh
 module load cuda
 
@@ -34,7 +38,7 @@ pip install mamba-ssm
 pip install -r requirements.txt
 
 # Run the main script
-python main.py --N 10 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-130m-hf --corpus-path monology/pile-uncopyrighted --name-tag gpu-trial-with-downloads
+python main.py --N 10 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-130m-hf --corpus-path monology/pile-uncopyrighted --name-tag king-CHAI
 
 conda deactivate
 
