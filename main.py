@@ -88,10 +88,21 @@ def main(args):
             pbar.update(args.batch_size)
     print("*"*100)
     print("Prompt List has the following prompts:",prompts_list[0])
-    scores["XL"] = np.asarray(scores["XL"])
-    scores["S"] = np.asarray(scores["S"])
-    scores["Lower"] = np.asarray(scores["Lower"])
-    scores["zlib"] = np.asarray(scores["zlib"])
+
+    if scores["XL"].device.type == 'cuda':
+        scores["XL"] = scores["XL"].cpu().numpy()
+        scores["S"] = scores["S"].cpu().numpy()
+        scores["Lower"] = scores["Lower"].cpu().numpy()
+        scores["zlib"] = scores["zlib"].cpu().numpy()
+    elif scores["XL"].device.type == 'cpu':
+        scores["XL"] = np.asarray(scores["XL"])
+        scores["S"] = np.asarray(scores["S"])
+        scores["Lower"] = np.asarray(scores["Lower"])
+        scores["zlib"] = np.asarray(scores["zlib"])
+    else:
+        raise RuntimeError("Unknown device type encountered.")
+
+    
 
     model1_name = args.model1.replace("/", "_")
     model2_name = args.model2.replace("/", "_")
