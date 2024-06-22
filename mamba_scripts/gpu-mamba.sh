@@ -31,7 +31,6 @@ source /exports/eddie/scratch/s2558433/miniconda3/etc/profile.d/conda.sh
 module load anaconda
 
 cd /exports/eddie/scratch/s2558433/ArchitectureExtraction/
-
 conda activate mamba
 #pip install causal-conv1d>=1.2.0
 #pip install mamba-ssm
