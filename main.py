@@ -91,10 +91,10 @@ def main(args):
 
     try:
         if scores["XL"].device.type == 'cuda':
-            scores["XL"] = scores["XL"].cpu().numpy
-            scores["S"] = scores["S"].cpu().numpy
-            scores["Lower"] = scores["Lower"].cpu().numpy
-            scores["zlib"] = scores["zlib"].cpu().numpy
+            scores["XL"] = scores["XL"].cpu().detach().numpy()
+            scores["S"] = scores["S"].cpu().detach().numpy()
+            scores["Lower"] = scores["Lower"].cpu().detach().numpy()
+            scores["zlib"] = scores["zlib"].cpu().detach().numpy()
         elif scores["XL"].device.type == 'cpu':
             scores["XL"] = np.asarray(scores["XL"])
             scores["S"] = np.asarray(scores["S"])
