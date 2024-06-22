@@ -20,6 +20,8 @@ export CONDA_PKGS_DIRS="/exports/eddie/scratch/s2558433/.cache/conda_pkgs"
 . /etc/profile.d/modules.sh
 module load cuda
 
+module load cuda/12.1.1
+
 source /exports/eddie/scratch/s2558433/miniconda3/etc/profile.d/conda.sh
 module load anaconda
 
@@ -32,7 +34,7 @@ pip install mamba-ssm
 pip install -r requirements.txt
 
 # Run the main script
-python main.py --N 1000 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-130m-hf --corpus-path monology/pile-uncopyrighted --name-tag gpu-trial-with-downloads
+python main.py --N 10 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-130m-hf --corpus-path monology/pile-uncopyrighted --name-tag gpu-trial-with-downloads
 
 conda deactivate
 
