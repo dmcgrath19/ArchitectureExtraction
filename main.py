@@ -87,20 +87,27 @@ def main(args):
 
             pbar.update(args.batch_size)
     print("*"*100)
-    print("Prompt List has the following prompts:",prompts_list[0])
-
-    if scores["XL"].device.type == 'cuda':
-        scores["XL"] = scores["XL"].detach().cpu().numpy()
-        scores["S"] = scores["S"].detach().cpu().numpy()
-        scores["Lower"] = scores["Lower"].detach().cpu().numpy()
-        scores["zlib"] = scores["zlib"].detach().cpu().numpy()
-    elif scores["XL"].device.type == 'cpu':
-        scores["XL"] = np.asarray(scores["XL"])
-        scores["S"] = np.asarray(scores["S"])
-        scores["Lower"] = np.asarray(scores["Lower"])
-        scores["zlib"] = np.asarray(scores["zlib"])
+    print("Prompt List has the following prompt
+    if isinstance(scores["XL"], list):  # Assuming scores["XL"] is a list of tensors
+        scores["XL"] = [t.detach().cpu().numpy() for t in scores["XL"]]
+        scores["S"] = [t.detach().cpu().numpy() for t in scores["S"]]
+        scores["Lower"] = [t.detach().cpu().numpy() for t in scores["Lower"]]
+        scores["zlib"] = [t.detach().cpu().numpy() for t in scores["zlib"]]
+    elif isinstance(scores["XL"], torch.Tensor):  # Assuming scores["XL"] is a single tensor
+        if scores["XL"].device.type == 'cuda':
+            scores["XL"] = scores["XL"].detach().cpu().numpy()
+            scores["S"] = scores["S"].detach().cpu().numpy()
+            scores["Lower"] = scores["Lower"].detach().cpu().numpy()
+            scores["zlib"] = scores["zlib"].detach().cpu().numpy()
+        elif scores["XL"].device.type == 'cpu':
+            scores["XL"] = np.asarray(scores["XL"])
+            scores["S"] = np.asarray(scores["S"])
+            scores["Lower"] = np.asarray(scores["Lower"])
+            scores["zlib"] = np.asarray(scores["zlib"])
+        else:
+            raise RuntimeError("Unknown device type encountered.")
     else:
-        raise RuntimeError("Unknown device type encountered.")
+        raise TypeError("scores['XL'] should be either a list of tensors or a single tensor")
 
 
     
