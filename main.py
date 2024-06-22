@@ -80,30 +80,30 @@ def main(args):
 
                 samples.append(text)
                 prompts_list.append(prompts)
-                scores["XL"].append(p1)
-                scores["S"].append(p2)
-                scores["Lower"].append(p_lower)
-                scores["zlib"].append(zlib_entropy)
+                scores["XL"].append(p1.cpu())
+                scores["S"].append(p2.cpu())
+                scores["Lower"].append(p_lower.cpu())
+                scores["zlib"].append(zlib_entropy.cpu())
 
             pbar.update(args.batch_size)
     print("*"*100)
     print("Prompt List has the following prompts:",prompts_list[0])
 
-    try:
-        if scores["XL"].device.type == 'cuda':
-            scores["XL"] = scores["XL"].cpu().detach().numpy()
-            scores["S"] = scores["S"].cpu().detach().numpy()
-            scores["Lower"] = scores["Lower"].cpu().detach().numpy()
-            scores["zlib"] = scores["zlib"].cpu().detach().numpy()
-        elif scores["XL"].device.type == 'cpu':
-            scores["XL"] = np.asarray(scores["XL"])
-            scores["S"] = np.asarray(scores["S"])
-            scores["Lower"] = np.asarray(scores["Lower"])
-            scores["zlib"] = np.asarray(scores["zlib"])
-        else:
-            raise RuntimeError("Unknown device type encountered.")
-    except Exception as e:
-        print(f"Error occurred: {e}")
+    # try:
+    #     if scores["XL"].device.type == 'cuda':
+    #         scores["XL"] = scores["XL"].cpu().detach().numpy()
+    #         scores["S"] = scores["S"].cpu().detach().numpy()
+    #         scores["Lower"] = scores["Lower"].cpu().detach().numpy()
+    #         scores["zlib"] = scores["zlib"].cpu().detach().numpy()
+        # elif scores["XL"].device.type == 'cpu':
+    scores["XL"] = np.asarray(scores["XL"])
+    scores["S"] = np.asarray(scores["S"])
+    scores["Lower"] = np.asarray(scores["Lower"])
+    scores["zlib"] = np.asarray(scores["zlib"])
+    #     else:
+    #         raise RuntimeError("Unknown device type encountered.")
+    # except Exception as e:
+    #     print(f"Error occurred: {e}")
 
 
     
