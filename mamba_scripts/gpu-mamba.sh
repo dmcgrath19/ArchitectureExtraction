@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # Use the variable for the job name and log/error files
-#$ -N mamba-160m-rebuilt-ex
-#$ -o /exports/eddie/scratch/s2558433/job_runs/mambax-130m_$JOB_ID.log
-#$ -e /exports/eddie/scratch/s2558433/job_runs/mambax-130m_$JOB_ID.err
+#$ -N CHAI-KING
+#$ -o /exports/eddie/scratch/s2558433/job_runs/CHAI-mambax-130m_$JOB_ID.log
+#$ -e /exports/eddie/scratch/s2558433/job_runs/CHAI-mambax-130m_$JOB_ID.err
 #$ -cwd
 #$ -q gpu
 #$ -pe gpu-a100 1
