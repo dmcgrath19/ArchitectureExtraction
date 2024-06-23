@@ -11,16 +11,19 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 
-def parse_pilecorpus(path):
+def parse_pilecorpus(path, subpath=None):
     """
     Quick and ugly parsing of a WET file.
     Tested for the May 2021 crawl.
     """
-    #TODO: add this so it works for the-pile-splitted ex: ds = load_dataset("ArmelR/the-pile-splitted", "ArXiv")
-
     
     all_texts = ""
-    dataset = load_dataset(path, split="train", streaming=True)
+
+    if subpath!=None:
+        dataset = load_dataset(path, subpath, split="train", streaming=True)
+    else:
+        dataset = load_dataset(path, split="train", streaming=True)
+    
     shuffled_dataset = dataset.shuffle(seed=42)
     #len(dataset['train'])
     dataset_head= shuffled_dataset.skip(0)
