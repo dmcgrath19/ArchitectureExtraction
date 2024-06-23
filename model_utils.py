@@ -4,12 +4,7 @@ import logging
 from datasets import load_dataset
 logging.basicConfig(level='ERROR')
 
-
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-
-
-device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-
 
 def parse_pilecorpus(path, subpath=None):
     """
