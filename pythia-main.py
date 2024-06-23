@@ -13,7 +13,7 @@ def main(args):
     print(f"Using device: {device}")
     print("Loading dataset...")
     path="monology/pile-uncopyrighted"
-    ds= parse_pilecorpus(path, args.corpus_subset)
+    ds= parse_pilecorpus(path, subpath=args.corpus_subset)
     print("Length:", len(ds))
    
     seq_len = 256
