@@ -20,7 +20,7 @@ def parse_pilecorpus(path, subpath=None):
     all_texts = ""
 
     if subpath!=None:
-        dataset = load_dataset(path, pile_set_name="HackerNews", split="train", streaming=True)
+        dataset = load_dataset("ArmelR/the-pile-splitted", "HackerNews", split="train", streaming=True)
     else:
         dataset = load_dataset(path, split="train", streaming=True)
     
