@@ -13,7 +13,7 @@ def main(args):
     print(f"Using device: {device}")
     print("Loading dataset...")
     path="monology/pile-uncopyrighted"
-    ds= parse_pilecorpus(path)
+    ds= parse_pilecorpus(path, args.corpus_subset, args.random_seed)
     print("Length:", len(ds))
    
     seq_len = 256
@@ -171,6 +171,8 @@ def parse_arguments(argv):
     parser.add_argument('--corpus-path', type=str, required=True, help="Path to the corpus dataset")
     parser.add_argument('--corpus-subset', type=str, required=False, help="data subset if using splitted data")
     parser.add_argument('--name-tag', type=str, required=False, help="Path to the corpus dataset")
+    parser.add_argument('--random-seed', type=int, required=False, help="Random seed for dataset shuffling")
+
 
     return parser.parse_args(argv)
 
