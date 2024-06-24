@@ -12,8 +12,7 @@ from model_utils import calculate_perplexity, print_best, parse_pilecorpus, devi
 def main(args):
     print(f"Using device: {device}")
     print("Loading dataset...")
-    path="monology/pile-uncopyrighted"
-    ds= parse_pilecorpus(path, args.corpus_subset, args.random_seed)
+    ds= parse_pilecorpus(args.corpus_path, args.corpus_subset, args.random_seed)
     print("Length:", len(ds))
    
     seq_len = 256
