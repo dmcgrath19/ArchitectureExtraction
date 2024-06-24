@@ -5,7 +5,7 @@ import torch
 import zlib
 import csv
 from datasets import load_dataset
-from transformers import  MambaConfig, MambaForCausalLM, AutoTokenizer
+from transformers import MambaForCausalLM, AutoTokenizer, GPTNeoXForCausalLM
 from tqdm import tqdm
 from model_utils import calculate_perplexity, print_best, parse_pilecorpus, device
 
@@ -13,7 +13,7 @@ def main(args):
     print(f"Using device: {device}")
     print("Loading dataset...")
     path="monology/pile-uncopyrighted"
-    ds= parse_pilecorpus(path)
+    ds= parse_pilecorpus(path, args.corpus_subset, args.random_seed)
     print("Length:", len(ds))
    
     seq_len = 256
@@ -21,13 +21,22 @@ def main(args):
 
     print("Loading models...")
     
+    
+
     tokenizer = AutoTokenizer.from_pretrained(args.model1)
     tokenizer.padding_side = "left"
     tokenizer.pad_token = tokenizer.eos_token
 
-    model1 = MambaForCausalLM.from_pretrained(args.model1, return_dict=True).to(device)
+    model1, model2 = None, None
+
+    if args.is_mamba:
+        model1 = MambaForCausalLM.from_pretrained(args.model1, return_dict=True).to(device)
+        model2 = MambaForCausalLM.from_pretrained(args.model2, return_dict=True).to(device)
+    else:
+        model1 = GPTNeoXForCausalLM.from_pretrained(args.model1, return_dict=True).to(device)
+        model2 = GPTNeoXForCausalLM.from_pretrained(args.model2, return_dict=True).to(device)
+
     model1.config.pad_token_id = model1.config.eos_token_id
-    model2 = MambaForCausalLM.from_pretrained(args.model2, return_dict=True).to(device)
     model2.eval()
 
     samples = []
@@ -35,81 +44,99 @@ def main(args):
     scores = {"XL": [], "S": [], "Lower": [], "zlib": []}
 
     num_batches = int(np.ceil(args.N / args.batch_size))
+    
     with tqdm(total=args.N) as pbar:
         for _ in range(num_batches):
-            
-            input_len = 10
+            #input_len 25 works pile
+            input_len = 150
             input_ids = []
             attention_mask = []
-
+            
             while len(input_ids) < args.batch_size:
                 # Sample random text from the Pile corpus
                 r = np.random.randint(0, len(ds))
-                # prompt = " ".join(ds[r].split()[:100])
-                prompt = " ".join(ds[r:r+100].split(" ")[1:-1])
-                # Tokenize the prompt ensuring consistent input lengths
-                inputs = tokenizer(prompt, return_tensors="pt", max_length=input_len, truncation=True, padding="max_length")
-                if len(inputs['input_ids'][0]) == input_len:
-                    input_ids.append(inputs['input_ids'][0])
-                    attention_mask.append(inputs['attention_mask'][0])
+                
+                # print("*"*100)
+                # print("The index Selected is:", r)
+                
+                
+                chunk = " ".join(ds[r:r+10000].split(" ")[1:-1])
+                
+                tokenized_chunk = tokenizer(chunk, return_tensors="pt")
+                token_ids= tokenized_chunk['input_ids'][0]
+
+                prompt_ids= token_ids[:input_len]
+                prompt= tokenizer.decode(prompt_ids, skip_special_tokens=True)
+                # print("the lenght of tokenized prompt is:", len(inputs))
+                # print(inputs)
+                suffix_ids= token_ids[input_len:input_len+ 50 ]
+                suffix= tokenizer.decode(suffix_ids, skip_special_tokens=True)
+
+
+                input_ids.append(prompt_ids)
+                attention_mask.append(torch.ones_like(prompt_ids))
+                prompts_list.append(prompt)
+                prompt_suffix.append(suffix)
+                
 
             inputs = {'input_ids': torch.stack(input_ids), 
                       'attention_mask': torch.stack(attention_mask)}
-
-            # The actual truncated prompts
-            prompts = tokenizer.batch_decode(inputs['input_ids'], skip_special_tokens=True)
- 
+            
+            
             print("Attention Mask shape:", inputs['attention_mask'].shape)
-
+        
             output_sequences = model1.generate(
                 input_ids=inputs['input_ids'].to(device),
                 attention_mask=inputs['attention_mask'].to(device),
                 max_length=input_len + seq_len,
                 do_sample=True, 
-                top_k=top_k, 
+                # top_k=top_k, 
                 top_p=1.0
             )
 
-            texts = tokenizer.batch_decode(output_sequences, skip_special_tokens=True)
-            prompts_list.append(prompts)
+            texts = [tokenizer.decode(seq, skip_special_tokens=True) for seq in output_sequences]
+            
             for text in texts:
                 p1 = calculate_perplexity(text, model1, tokenizer)
                 p2 = calculate_perplexity(text, model2, tokenizer)
                 p_lower = calculate_perplexity(text.lower(), model1, tokenizer)
                 zlib_entropy = len(zlib.compress(bytes(text, 'utf-8')))
-
+                
                 samples.append(text)
-                prompts_list.append(prompts)
+                
+                
                 scores["XL"].append(p1.cpu())
                 scores["S"].append(p2.cpu())
                 scores["Lower"].append(p_lower.cpu())
                 scores["zlib"].append(zlib_entropy)
-
+                
             pbar.update(args.batch_size)
-    print("*"*100)
-    print("Prompt List has the following prompts:",prompts_list[0])
-
-    # try:
-    #     if scores["XL"].device.type == 'cuda':
-    #         scores["XL"] = scores["XL"].cpu().detach().numpy()
-    #         scores["S"] = scores["S"].cpu().detach().numpy()
-    #         scores["Lower"] = scores["Lower"].cpu().detach().numpy()
-    #         scores["zlib"] = scores["zlib"].cpu().detach().numpy()
-        # elif scores["XL"].device.type == 'cpu':
+    # print("*"*100)
+    # print("Prompt List has the following prompts:",len(prompts_list[0]))
     scores["XL"] = np.asarray(scores["XL"])
     scores["S"] = np.asarray(scores["S"])
     scores["Lower"] = np.asarray(scores["Lower"])
     scores["zlib"] = np.asarray(scores["zlib"])
-    #     else:
-    #         raise RuntimeError("Unknown device type encountered.")
-    # except Exception as e:
-    #     print(f"Error occurred: {e}")
-
-
-    
 
     model1_name = args.model1.replace("/", "_")
     model2_name = args.model2.replace("/", "_")
+
+    
+   
+    sample_test = [s[input_len:input_len+50] for s in samples]
+    
+    comparison_result = [1 if sample == prompt else 0 for sample, prompt in zip(sample_test, prompt_suffix)]
+    # print("The comparison list length is:", len(comparison_result))
+    ones_count = sum(comparison_result)
+    total_count = len(comparison_result)
+    memorization = (ones_count / total_count) * 100
+    
+    
+    print("Memorization is: "  , memorization)
+    # prompts_list = [item for sublist in prompts_list for item in sublist]
+    print("*"*100)
+    print("Number of prompts are:", len(prompts_list))
+    print("Prompts_list is: ", prompts_list)
     
     output_csv = f'output_scores_{model1_name}_{model2_name}_{args.name_tag}.csv'
     with open(output_csv, 'w', newline='') as csvfile:
@@ -153,6 +180,9 @@ def parse_arguments(argv):
     parser.add_argument('--corpus-path', type=str, required=True, help="Path to the corpus dataset")
     parser.add_argument('--corpus-subset', type=str, required=False, help="data subset if using splitted data")
     parser.add_argument('--name-tag', type=str, required=False, help="Path to the corpus dataset")
+    parser.add_argument('--random-seed', type=int, required=False, help="Random seed for dataset shuffling")
+    parser.add_argument('--is-mamba', type=bool, required=False, help="Determine type of tokeniser")
+
 
     return parser.parse_args(argv)
 
