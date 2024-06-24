@@ -1,7 +1,7 @@
 import torch
 import numpy as np
 import logging
-from datasets import load_dataset
+from datasets import load_dataset, get_dataset_config_names
 logging.basicConfig(level='ERROR')
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
@@ -14,10 +14,18 @@ def parse_pilecorpus(path, subpath=None, start_seed=42):
     
     all_texts = ""
 
-    if subpath!=None:
-        dataset = load_dataset(path, name=subpath, split="train", streaming=True)
-    else:
-        dataset = load_dataset(path, split="train", streaming=True)
+    available_configs = get_dataset_config_names(path)
+    
+    # Use 'default' if no valid subpath is provided or subpath is not in available configurations
+    if subpath not in available_configs:
+        print(f"Warning: '{subpath}' not found. Using 'default' instead.")
+        subpath = 'default'
+
+    print(subpath)
+    print(path)
+    print(start_seed)
+
+    dataset = load_dataset(path, split="train", streaming=True)
     
     shuffled_dataset = dataset.shuffle(seed=start_seed)
 
