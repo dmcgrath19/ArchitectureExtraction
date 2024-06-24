@@ -30,8 +30,6 @@ conda activate pythia
 
 # Run the main script
 
-mv output*.txt output*.csv /prev-runs/pythia-410/
-
 python pythia-main.py --N 10000 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model2 EleutherAI/pythia-410m --corpus-path "ArmelR/the-pile-splitted" --corpus-subset "DM Mathematics" --name-tag "10k-dm-math"
 mv output*.txt output*.csv /exports/eddie/scratch/s2558433/ArchitectureExtraction/prev-runs/pythia-410/
 
