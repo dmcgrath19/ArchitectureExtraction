@@ -21,8 +21,6 @@ def main(args):
 
     print("Loading models...")
     
-    
-
     tokenizer = AutoTokenizer.from_pretrained(args.model1)
     tokenizer.padding_side = "left"
     tokenizer.pad_token = tokenizer.eos_token
@@ -56,10 +54,6 @@ def main(args):
                 # Sample random text from the Pile corpus
                 r = np.random.randint(0, len(ds))
                 
-                # print("*"*100)
-                # print("The index Selected is:", r)
-                
-                
                 chunk = " ".join(ds[r:r+10000].split(" ")[1:-1])
                 
                 tokenized_chunk = tokenizer(chunk, return_tensors="pt")
@@ -79,9 +73,7 @@ def main(args):
                 prompt_suffix.append(suffix)
                 
 
-            inputs = {'input_ids': torch.stack(input_ids), 
-                      'attention_mask': torch.stack(attention_mask)}
-            
+            inputs = {'input_ids': torch.stack(input_ids), 'attention_mask': torch.stack(attention_mask)}
             
             print("Attention Mask shape:", inputs['attention_mask'].shape)
         
@@ -121,8 +113,6 @@ def main(args):
     model1_name = args.model1.replace("/", "_")
     model2_name = args.model2.replace("/", "_")
 
-    
-   
     sample_test = [s[input_len:input_len+50] for s in samples]
     
     comparison_result = [1 if sample == prompt else 0 for sample, prompt in zip(sample_test, prompt_suffix)]
@@ -130,7 +120,6 @@ def main(args):
     ones_count = sum(comparison_result)
     total_count = len(comparison_result)
     memorization = (ones_count / total_count) * 100
-    
     
     print("Memorization is: "  , memorization)
     # prompts_list = [item for sublist in prompts_list for item in sublist]
