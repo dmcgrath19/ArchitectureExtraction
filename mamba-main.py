@@ -9,7 +9,7 @@ from transformers import  MambaConfig, MambaForCausalLM, AutoTokenizer
 from tqdm import tqdm
 from model_utils import calculate_perplexity, print_best, parse_pilecorpus, device
 
-def main(args):
+def main(args): 
     print(f"Using device: {device}")
     print("Loading dataset...")
     path="monology/pile-uncopyrighted"
