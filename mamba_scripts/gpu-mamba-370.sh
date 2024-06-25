@@ -53,16 +53,16 @@ mkdir -p /exports/eddie/scratch/s2558433/ArchitectureExtraction/prev-runs/mamba-
 # mv output*.txt output*.csv /prev-runs/mamba-370/
 
 python mamba-main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-370m-hf --corpus-path monology/pile-uncopyrighted --name-tag 10k-pile-5
-mv output*.txt output*.csv /prev-runs/mamba-370/
+# mv output*.txt output*.csv /prev-runs/mamba-370/
 
 python mamba-main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-370m-hf --corpus-path "ArmelR/the-pile-splitted" --corpus-subset "DM Mathematics" --name-tag '10k-dm-math' 
-mv output*.txt output*.csv /exports/eddie/scratch/s2558433/ArchitectureExtraction/prev-runs/mamba-370/
+# mv output*.txt output*.csv /exports/eddie/scratch/s2558433/ArchitectureExtraction/prev-runs/mamba-370/
 
 python mamba-main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-370m-hf --corpus-path "ArmelR/the-pile-splitted" --corpus-subset "Github" --name-tag '10k-github '
-mv output*.txt output*.csv /exports/eddie/scratch/s2558433/ArchitectureExtraction/prev-runs/mamba-370/
+# mv output*.txt output*.csv /exports/eddie/scratch/s2558433/ArchitectureExtraction/prev-runs/mamba-370/
 
 python mamba-main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-370m-hf --corpus-path "ArmelR/the-pile-splitted" --corpus-subset "Wikipedia (en)" --name-tag '10k-wiki '
-mv output*.txt output*.csv /exports/eddie/scratch/s2558433/ArchitectureExtraction/prev-runs/mamba-370/
+# mv output*.txt output*.csv /exports/eddie/scratch/s2558433/ArchitectureExtraction/prev-runs/mamba-370/
 
 conda deactivate
 

@@ -32,7 +32,9 @@ def main(args):
 
     samples = []
     prompts_list = []
-    scores = {"XL": [], "S": [], "Lower": [], "zlib": []}
+    prompt_suffix=[]
+
+    scores = {"mem":[], "XL": [], "S": [], "Lower": [], "zlib": []}
 
     num_batches = int(np.ceil(args.N / args.batch_size))
     
@@ -52,7 +54,16 @@ def main(args):
                 
                 
                 chunk = " ".join(ds[r:r+10000].split(" ")[1:-1])
-                
+                # print("The length of a prompt is:", len(prompt))
+                # print("The prompt is :",prompt)
+                # print("*"  * 100)
+                # prompt_suff=  " ".join(ds[r:r+10000].split(" ")[1:-1])
+                # print("The length of the suffix is: ", len(prompt_suff))
+                # print("The untruncated prompt is:",prompt)
+                # print("The prompt suffix is: ", prompt_suff)
+                # print("*"  * 100)
+                # Tokenize the prompt ensuring consistent input lengths
+                #removed padding="max_length" and max_length=input_len,
                 tokenized_chunk = tokenizer(chunk, return_tensors="pt")
                 token_ids= tokenized_chunk['input_ids'][0]
 
@@ -68,11 +79,21 @@ def main(args):
                 attention_mask.append(torch.ones_like(prompt_ids))
                 prompts_list.append(prompt)
                 prompt_suffix.append(suffix)
-                
-
+                # print("The prompt is:", prompt)
+                # print("*"*100)
+                # print("The suffix is:", suffix)
+                # if len(inputs['input_ids'][0]) == input_len:
+                #     input_ids.append(inputs['input_ids'][0])
+                #     attention_mask.append(inputs['attention_mask'][0])
+            # print("The input_ids are:", input_ids) 
             inputs = {'input_ids': torch.stack(input_ids), 
                       'attention_mask': torch.stack(attention_mask)}
             
+            # The actual truncated prompts
+            # prompts = tokenizer.decode(inputs['input_ids'], skip_special_tokens=True)
+            # print("The truncated prompt list is:", prompts)
+            # print("The truncated prompt list length is:", len(prompts))
+            # print("The truncated prompts len after changing input len:",len(prompts[0]))
             
             print("Attention Mask shape:", inputs['attention_mask'].shape)
         
@@ -86,7 +107,12 @@ def main(args):
             )
 
             texts = [tokenizer.decode(seq, skip_special_tokens=True) for seq in output_sequences]
-            
+            # prompts_list.append(prompts)
+        
+            # print("The prompt list is:", prompts_list[0][:2])
+            # print("The prompt list is:", prompts_list)
+            # print("The prompt suffix is:", prompt_suffix[0][:2])
+            # print("len of prompts and suffix list:", len(prompts_list[0]), len(prompt_suffix))
             for text in texts:
                 p1 = calculate_perplexity(text, model1, tokenizer)
                 p2 = calculate_perplexity(text, model2, tokenizer)
@@ -114,8 +140,18 @@ def main(args):
 
     
    
+    # sample_test_full = [s[:200] for s in samples]
     sample_test = [s[input_len:input_len+50] for s in samples]
     
+    # print("*"*100)
+    # print("sample_test examples are:", sample_test)
+    # print("*"*100)
+    # print("sample_test examples are:", sample_test_full)
+    # print("prompt suffix examples are:", prompt_suffix)
+    # print("the length of sample_test", len(sample_test))
+    # print("*"*100)
+    # print("prompt_suffix is :", prompt_suffix)
+    # print("the length of suffix are", len(prompt_suffix))
     comparison_result = [1 if sample == prompt else 0 for sample, prompt in zip(sample_test, prompt_suffix)]
     # print("The comparison list length is:", len(comparison_result))
     ones_count = sum(comparison_result)
@@ -128,17 +164,20 @@ def main(args):
     print("*"*100)
     print("Number of prompts are:", len(prompts_list))
     print("Prompts_list is: ", prompts_list)
-    
+    # # print("*"*100)
+    # print("Number of Prompt Suffix are:", len(prompt_suffix))
+
     output_csv = f'output_scores_{model1_name}_{model2_name}_{args.name_tag}.csv'
+    
     with open(output_csv, 'w', newline='') as csvfile:
-        fieldnames = ['sample', 'prompt','PPL_XL', 'PPL_S', 'PPL_Lower', 'Zlib']
+        fieldnames = ['sample', 'prompt', 'suffix', 'memorized', 'PPL_XL', 'PPL_S', 'PPL_Lower', 'Zlib']
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         writer.writeheader()
-        for sample, prompt, xl, s, lower, zlib_ in zip(samples, prompts_list[0], scores["XL"], scores["S"], scores["Lower"], scores["zlib"]):
-            writer.writerow({'sample': sample, 'prompt': prompt,'PPL_XL': xl, 'PPL_S': s, 'PPL_Lower': lower, 'Zlib': zlib_})
+        for sample,prompt,suff, mem, xl, s, lower, zlib_ in zip(samples, prompts_list, prompt_suffix, comparison_result, scores["XL"], scores["S"], scores["Lower"], scores["zlib"]):
+            writer.writerow({'sample': sample, 'prompt': prompt, 'suffix': suff, 'memorized': mem, 'PPL_XL': xl, 'PPL_S': s, 'PPL_Lower': lower, 'Zlib': zlib_})
 
     print("Results saved to ", output_csv)
-
+    
     output_txt = f'output_results_{model1_name}_{model2_name}_{args.name_tag}.txt'
     with open(output_txt, 'w') as f:
         metric = -np.log(scores["XL"])
@@ -159,6 +198,9 @@ def main(args):
         metric = scores["zlib"] / np.log(scores["XL"])
         f.write(f"======== top sample by ratio of Zlib entropy and XL perplexity: ========\n")
         f.write(print_best(metric, samples, "PPL-XL", scores["XL"], "Zlib", scores["zlib"]))
+
+        f.write(f"======== Percentage of memorization is: ========\n")
+        f.write(f"========{memorization}")
 
     print("Top results written to ", output_txt)
 
