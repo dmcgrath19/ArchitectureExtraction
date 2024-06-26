@@ -55,7 +55,7 @@ def main(args):
                 # Sample random text from the Pile corpus
                 r = np.random.randint(0, len(ds))
                 
-                chunk = " ".join(ds[r:r+1].split(" ")[1:-1])#TODO REVERT BACK HERE
+                chunk = " ".join(ds[r:r+10].split(" ")[1:-1])#TODO REVERT BACK HERE
                 
                 tokenized_chunk = tokenizer(chunk, return_tensors="pt")
                 token_ids= tokenized_chunk['input_ids'][0]
@@ -75,6 +75,17 @@ def main(args):
                 attention_mask.append(torch.ones_like(prompt_ids))
                 prompts_list.append(prompt)
                 prompt_suffix.append(suffix)
+
+            print("THIS IS SMALLER CHUNKING FOR DEBUGGING *** NOT A REAL RUN")
+            print(args.corpus_path)
+            print(args.corpus_subset)
+            print(args.model2)
+
+            print("Input IDs shape:", torch.stack(input_ids).shape)
+            print(input_ids)
+
+            print("Attention Mask shape:", torch.stack(attention_mask).shape)
+            print(attention_mask)
                 
 
             inputs = {'input_ids': torch.stack(input_ids), 'attention_mask': torch.stack(attention_mask)}
