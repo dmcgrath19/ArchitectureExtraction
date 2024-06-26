@@ -55,7 +55,7 @@ def main(args):
                 # Sample random text from the Pile corpus
                 r = np.random.randint(0, len(ds))
                 
-                chunk = " ".join(ds[r:r+10].split(" ")[1:-1])#TODO REVERT BACK HERE
+                chunk = " ".join(ds[r:r+10000].split(" ")[1:-1])#TODO REVERT BACK HERE
                 
                 tokenized_chunk = tokenizer(chunk, return_tensors="pt")
                 token_ids= tokenized_chunk['input_ids'][0]
@@ -76,7 +76,7 @@ def main(args):
                 prompts_list.append(prompt)
                 prompt_suffix.append(suffix)
 
-            print("THIS IS SMALLER CHUNKING FOR DEBUGGING *** NOT A REAL RUN")
+            print("\n\n*** THIS FOR DEBUGGING ***")
             print(args.corpus_path)
             print(args.corpus_subset)
             print(args.model2)

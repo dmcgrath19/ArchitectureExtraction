@@ -30,7 +30,7 @@ conda activate pythia
 
 # Run the main script
 
-python main.py --N 10 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model2 EleutherAI/pythia-410m --corpus-path "ArmelR/the-pile-splitted" --corpus-subset "DM Mathematics" --name-tag "problem-withDM"
+python main.py --N 10000 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model2 EleutherAI/pythia-410m --corpus-path "ArmelR/the-pile-splitted" --corpus-subset "DM Mathematics" --name-tag "problem-withDM"
 # mv output*.txt output*.csv /exports/e≈ddie/scratch/s2558433/ArchitectureExtraction/prev-runs/pythia-410/
 
 # python pythia-main.py --N 10000 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model2 EleutherAI/pythia-410m --corpus-path "ArmelR/the-pile-splitted" --corpus-subset "Github" --name-tag "10k-git"
