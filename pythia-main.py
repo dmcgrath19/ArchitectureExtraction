@@ -53,20 +53,12 @@ def main(args):
                 
                 
                 chunk = " ".join(ds[r:r+10000].split(" ")[1:-1])
-                # print("The length of a prompt is:", len(prompt))
-                # print("The prompt is :",prompt)
-                # print("*"  * 100)
-                # prompt_suff=  " ".join(ds[r:r+10000].split(" ")[1:-1])
-                # print("The length of the suffix is: ", len(prompt_suff))
-                # print("The untruncated prompt is:",prompt)
-                # print("The prompt suffix is: ", prompt_suff)
-                # print("*"  * 100)
-                # Tokenize the prompt ensuring consistent input lengths
-                #removed padding="max_length" and max_length=input_len,
                 tokenized_chunk = tokenizer(chunk, return_tensors="pt")
                 token_ids= tokenized_chunk['input_ids'][0]
 
                 prompt_ids= token_ids[:input_len]
+                if prompt_ids.shape[0] == 0:
+                    continue  # Skip empty prompts
                 prompt= tokenizer.decode(prompt_ids, skip_special_tokens=True)
                 # print("the lenght of tokenized prompt is:", len(inputs))
                 # print(inputs)
@@ -78,21 +70,19 @@ def main(args):
                 attention_mask.append(torch.ones_like(prompt_ids))
                 prompts_list.append(prompt)
                 prompt_suffix.append(suffix)
-                # print("The prompt is:", prompt)
-                # print("*"*100)
-                # print("The suffix is:", suffix)
-                # if len(inputs['input_ids'][0]) == input_len:
-                #     input_ids.append(inputs['input_ids'][0])
-                #     attention_mask.append(inputs['attention_mask'][0])
-            # print("The input_ids are:", input_ids) 
-            inputs = {'input_ids': torch.stack(input_ids), 
-                      'attention_mask': torch.stack(attention_mask)}
             
-            # The actual truncated prompts
-            # prompts = tokenizer.decode(inputs['input_ids'], skip_special_tokens=True)
-            # print("The truncated prompt list is:", prompts)
-            # print("The truncated prompt list length is:", len(prompts))
-            # print("The truncated prompts len after changing input len:",len(prompts[0]))
+            # Ensure uniform sequence length without unnecessary padding
+            input_ids_lengths = [ids.size(0) for ids in input_ids]
+            if len(set(input_ids_lengths)) == 1:
+                input_ids = torch.stack(input_ids)
+                attention_mask = torch.stack(attention_mask)
+            else:
+                print("*******Extra padding sequences...**********")
+                input_ids = torch.nn.utils.rnn.pad_sequence(input_ids, batch_first=True, padding_value=tokenizer.pad_token_id)
+                attention_mask = torch.nn.utils.rnn.pad_sequence(attention_mask, batch_first=True, padding_value=0)
+
+            inputs = {'input_ids': torch.stack(input_ids), 'attention_mask': torch.stack(attention_mask)}
+            
             
             print("Attention Mask shape:", inputs['attention_mask'].shape)
         
@@ -106,12 +96,6 @@ def main(args):
             )
 
             texts = [tokenizer.decode(seq, skip_special_tokens=True) for seq in output_sequences]
-            # prompts_list.append(prompts)
-        
-            # print("The prompt list is:", prompts_list[0][:2])
-            # print("The prompt list is:", prompts_list)
-            # print("The prompt suffix is:", prompt_suffix[0][:2])
-            # print("len of prompts and suffix list:", len(prompts_list[0]), len(prompt_suffix))
             for text in texts:
                 p1 = calculate_perplexity(text, model1, tokenizer)
                 p2 = calculate_perplexity(text, model2, tokenizer)
