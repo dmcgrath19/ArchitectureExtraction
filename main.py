@@ -55,7 +55,7 @@ def main(args):
                 # Sample random text from the Pile corpus
                 r = np.random.randint(0, len(ds))
                 
-                chunk = " ".join(ds[r:r+10000].split(" ")[1:-1])#TODO REVERT BACK HERE
+                chunk = " ".join(ds[r:r+10000].split(" ")[1:-1])
                 
                 tokenized_chunk = tokenizer(chunk, return_tensors="pt")
                 token_ids= tokenized_chunk['input_ids'][0]
