@@ -71,15 +71,7 @@ def main(args):
                 prompts_list.append(prompt)
                 prompt_suffix.append(suffix)
             
-            # Ensure uniform sequence length without unnecessary padding
-            input_ids_lengths = [ids.size(0) for ids in input_ids]
-            if len(set(input_ids_lengths)) == 1:
-                input_ids = torch.stack(input_ids)
-                attention_mask = torch.stack(attention_mask)
-            else:
-                print("*******Extra padding sequences...**********")
-                input_ids = torch.nn.utils.rnn.pad_sequence(input_ids, batch_first=True, padding_value=tokenizer.pad_token_id)
-                attention_mask = torch.nn.utils.rnn.pad_sequence(attention_mask, batch_first=True, padding_value=0)
+
 
             inputs = {'input_ids': torch.stack(input_ids), 'attention_mask': torch.stack(attention_mask)}
             
