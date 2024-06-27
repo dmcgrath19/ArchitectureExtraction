@@ -29,7 +29,7 @@ conda activate pythia
 #pip install -r requirements.txt
 
 # Run the main script
-python pythia-main.py --N 10000 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model2 EleutherAI/pythia-1.4b --corpus-path monology/pile-uncopyrighted --name-tag 10k-pile-1 
+python pythia-main.py --N 10000 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model2 EleutherAI/pythia-1.4b --corpus-path "monology/pile-uncopyrighted" --name-tag 10k-pile-1 
 #python main.py --N 1000 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model2 EleutherAI/pythia-410m --cor
 # python pythia-main.py --N 10 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model2 EleutherAI/pythia-160m --corpus-path "ArmelR/the-pile-splitted" --corpus-subset "DM Mathematics"
 conda deactivate 
