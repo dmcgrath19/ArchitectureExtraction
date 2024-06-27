@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # Use the variable for the job name and log/error files
-#$ -N mamba1.4
-#$ -o /exports/eddie/scratch/s2558433/job_runs/mambax-1.4_$JOB_ID.log
-#$ -e /exports/eddie/scratch/s2558433/job_runs/mambax-1.4_$JOB_ID.err
+#$ -N mamba12
+#$ -o /exports/eddie/scratch/s2558433/job_runs/mambax-12_$JOB_ID.log
+#$ -e /exports/eddie/scratch/s2558433/job_runs/mambax-12_$JOB_ID.err
 #$ -cwd
 #$ -q gpu
 #$ -pe gpu-a100 1
@@ -37,30 +37,34 @@ conda activate mamba
 
 #pip install -r requirements.txt
 
-# Run the main script
-python mamba-main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-1.4b-hf --corpus-path monology/pile-uncopyrighted --name-tag 10k-pile-1 --random-seed 33
-mv output*.txt output*.csv /prev-runs/mamba-1.4/
+python mamba-main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-1.4b-hf --corpus-path 'monology/pile-uncopyrighted' --name-tag 10k-pile
 
-python mamba-main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-1.4b-hf --corpus-path monology/pile-uncopyrighted --name-tag 10k-pile-2 --random-seed 36
-mv output*.txt output*.csv /prev-runs/mamba-1.4/
+python mamba-main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-2.8b-hf --corpus-path 'monology/pile-uncopyrighted' --name-tag 10k-pile
 
-python mamba-main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-1.4b-hf --corpus-path monology/pile-uncopyrighted --name-tag 10k-pile-3 --random-seed 53
-mv output*.txt output*.csv /prev-runs/mamba-1.4/
+# # Run the main script
+# python mamba-main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-1.4b-hf --corpus-path monology/pile-uncopyrighted --name-tag 10k-pile-1 --random-seed 33
+# mv output*.txt output*.csv /prev-runs/mamba-1.4/
 
-python mamba-main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-1.4b-hf --corpus-path monology/pile-uncopyrighted --name-tag 10k-pile-4 --random-seed 63
-mv output*.txt output*.csv /prev-runs/mamba-1.4/
+# python mamba-main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-1.4b-hf --corpus-path monology/pile-uncopyrighted --name-tag 10k-pile-2 --random-seed 36
+# mv output*.txt output*.csv /prev-runs/mamba-1.4/
 
-python mamba-main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-1.4b-hf --corpus-path monology/pile-uncopyrighted --name-tag 10k-pile-5 --random-seed 66
-mv output*.txt output*.csv /prev-runs/mamba-1.4/
+# python mamba-main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-1.4b-hf --corpus-path monology/pile-uncopyrighted --name-tag 10k-pile-3 --random-seed 53
+# mv output*.txt output*.csv /prev-runs/mamba-1.4/
 
-python mamba-main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-1.4b-hf --corpus-path "ArmelR/the-pile-splitted" --corpus-subset "DM Mathematics" --name-tag 10k-dm-math 
-mv output*.txt output*.csv /prev-runs/mamba-1.4/
+# python mamba-main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-1.4b-hf --corpus-path monology/pile-uncopyrighted --name-tag 10k-pile-4 --random-seed 63
+# mv output*.txt output*.csv /prev-runs/mamba-1.4/
 
-python mamba-main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-1.4b-hf --corpus-path "ArmelR/the-pile-splitted" --corpus-subset "Github" --name-tag 10k-github 
-mv output*.txt output*.csv /prev-runs/mamba-1.4/
+# python mamba-main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-1.4b-hf --corpus-path monology/pile-uncopyrighted --name-tag 10k-pile-5 --random-seed 66
+# mv output*.txt output*.csv /prev-runs/mamba-1.4/
 
-python mamba-main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-1.4b-hf --corpus-path "ArmelR/the-pile-splitted" --corpus-subset "Wikipedia (en)" --name-tag 10k-wiki 
-mv output*.txt output*.csv /prev-runs/mamba-1.4/
+# python mamba-main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-1.4b-hf --corpus-path "ArmelR/the-pile-splitted" --corpus-subset "DM Mathematics" --name-tag 10k-dm-math 
+# mv output*.txt output*.csv /prev-runs/mamba-1.4/
+
+# python mamba-main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-1.4b-hf --corpus-path "ArmelR/the-pile-splitted" --corpus-subset "Github" --name-tag 10k-github 
+# mv output*.txt output*.csv /prev-runs/mamba-1.4/
+
+# python mamba-main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-1.4b-hf --corpus-path "ArmelR/the-pile-splitted" --corpus-subset "Wikipedia (en)" --name-tag 10k-wiki 
+# mv output*.txt output*.csv /prev-runs/mamba-1.4/
 
 conda deactivate
 
