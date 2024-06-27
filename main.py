@@ -12,7 +12,7 @@ from model_utils import calculate_perplexity, print_best, parse_pilecorpus, devi
 def main(args):
     print(f"Using device: {device}")
     print("Loading dataset...")
-    ds= parse_pilecorpus(args.corpus_path, args.corpus_subset, args.random_seed)
+    ds= parse_pilecorpus(path=args.corpus_path, subpath=args.corpus_subset, start_seed=args.random_seed)
     print("Length:", len(ds))
    
     seq_len = 256
@@ -65,8 +65,7 @@ def main(args):
                     continue  # Skip empty prompts
 
                 prompt= tokenizer.decode(prompt_ids, skip_special_tokens=True)
-                print("the lenght of tokenized prompt is:", len(inputs))
-                print(inputs)
+                
                 suffix_ids= token_ids[input_len:input_len+ 50 ]
                 suffix= tokenizer.decode(suffix_ids, skip_special_tokens=True)
 
