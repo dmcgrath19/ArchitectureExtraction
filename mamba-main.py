@@ -56,7 +56,7 @@ def main(args):
 
                 prompt_ids= token_ids[:input_len]
                 if prompt_ids.shape[0] < input_len:
-                    continue  # Skip empty prompts
+                    continue  # Skip shoer prompts
 
                 prompt= tokenizer.decode(prompt_ids, skip_special_tokens=True)
                 
@@ -75,10 +75,9 @@ def main(args):
             print(args.model2)
 
             print("Input IDs shape:", torch.stack(input_ids).shape)
-            print(input_ids)
-
+            
             print("Attention Mask shape:", torch.stack(attention_mask).shape)
-            print(attention_mask)
+    
                 
 
             inputs = {'input_ids': torch.stack(input_ids), 'attention_mask': torch.stack(attention_mask)}
