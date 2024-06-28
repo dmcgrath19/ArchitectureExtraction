@@ -57,8 +57,8 @@ def main(args):
                 token_ids= tokenized_chunk['input_ids'][0]
 
                 prompt_ids= token_ids[:input_len]
-                if prompt_ids.shape[0] == 0:
-                    continue  # Skip empty prompts
+                if prompt_ids.shape[0] < input_len:
+                    continue  # Skip short prompts
                 prompt= tokenizer.decode(prompt_ids, skip_special_tokens=True)
                 # print("the lenght of tokenized prompt is:", len(inputs))
                 # print(inputs)
