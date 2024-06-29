@@ -24,7 +24,7 @@ def parse_pilecorpus(path,start_seed=42):
     return all_texts
 
 
-def parse_splitted(path, subset='default', max_examples=1000000):
+def parse_splitted(path, subset='default', max_examples=1000000, start_seed=42):
     """
     This is for parsing thePileSplitted dataset.
     """
@@ -39,13 +39,12 @@ def parse_splitted(path, subset='default', max_examples=1000000):
     # Load the dataset subset with streaming enabled
     dataset = load_dataset(path, subset, streaming=True)
 
-    # Iterate over the dataset subset and accumulate texts
-    for example in dataset:
-        all_texts += example['text']
-        examples_processed += 1
-        
-        if examples_processed >= max_examples:
-            break
+    shuffled_dataset = dataset.shuffle(seed=start_seed)
+    dataset_head= shuffled_dataset.skip(0)
+    dataset_head = shuffled_dataset.take(1000000)
+
+    for text in dataset_head:
+        all_texts+= text['text']
 
     return all_texts
 
