@@ -37,7 +37,7 @@ def parse_splitted(path, subset='default', max_examples=1000000, start_seed=42):
     print(f"Path: {path}")
 
     # Load the dataset subset with streaming enabled
-    dataset = load_dataset(path, subset, streaming=True)
+    dataset = load_dataset(path, subset,split="train", streaming=True)
 
     shuffled_dataset = dataset.shuffle(seed=start_seed)
     dataset_head= shuffled_dataset.skip(0)
