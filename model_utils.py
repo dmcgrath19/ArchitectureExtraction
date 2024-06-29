@@ -46,10 +46,12 @@ def parse_splitted(path, subset='default', max_examples=1000000, start_seed=42):
     for text in dataset_head:
         all_texts+= text['text']
 
+    print("completed parsing")
+
     return all_texts
 
 
-def parse_wmt_splitted(path, split_set='train'):
+def parse_wmt_splitted(path, split_set='train', start_seed=42):
     """
     This is for getting data from KaiNylund/WMT-year-splits
     """
@@ -61,13 +63,17 @@ def parse_wmt_splitted(path, split_set='train'):
     # Load the dataset split with streaming enabled
     dataset = load_dataset(path, split=split_set, streaming=True)
     
-    # Iterate over the dataset split and accumulate texts
-    for idx, example in enumerate(dataset):
-        all_texts += example['text']
-        
-        # Optional: Limit the number of examples processed
-        if idx >= 1000000:
-            break
+    shuffled_dataset = dataset.shuffle(seed=start_seed)
+    dataset_head= shuffled_dataset.skip(0)
+    dataset_head = shuffled_dataset.take(1000000)
+
+    for text in dataset_head:
+        all_texts+= text['text']
+
+    print("completed parsing")
+
+
+    print("completed parsing")
     
     return all_texts
 
