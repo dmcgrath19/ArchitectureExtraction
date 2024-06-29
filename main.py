@@ -12,7 +12,7 @@ from model_utils import calculate_perplexity, print_best, parse_pilecorpus, devi
 def main(args):
     print(f"Using device: {device}")
     print("Loading dataset...")
-    ds= parse_pilecorpus(path=args.corpus_path, subpath_set=args.corpus_subset, start_seed=args.random_seed)
+    ds= parse_pilecorpus(path=args.corpus_path, subset=args.corpus_subset, start_seed=args.random_seed)
     print("Length:", len(ds))
    
     seq_len = 256
