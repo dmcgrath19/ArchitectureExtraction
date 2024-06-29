@@ -23,26 +23,29 @@ def parse_pilecorpus(path,start_seed=42):
 
     return all_texts
 
-def parse_splitted(path, subset='default', start_seed=42):
+
+def parse_splitted(path, subset='default', max_examples=1000000):
     """
     This is for parsing thePileSplitted dataset.
     """
     print("Streaming the splitted pile")
-
     
     all_texts = ""
+    examples_processed = 0
 
     print(f"Subset: {subset}")
     print(f"Path: {path}")
-    print(f"Start Seed: {start_seed}")
 
-    # Load dataset with streaming enabled
+    # Load the dataset subset with streaming enabled
     dataset = load_dataset(path, subset, streaming=True)
 
-    for idx, example in enumerate(dataset):
-        if idx >= 1000000:  # Limiting to 1,000,000 examples
-            break
+    # Iterate over the dataset subset and accumulate texts
+    for example in dataset:
         all_texts += example['text']
+        examples_processed += 1
+        
+        if examples_processed >= max_examples:
+            break
 
     return all_texts
 
