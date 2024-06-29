@@ -15,14 +15,10 @@ def parse_pilecorpus(path, subpath_set='default', start_seed=42, split_set="trai
     all_texts = ""
 
     available_configs = get_dataset_config_names(path)
-    
-    # Use 'default' if no valid subpath is provided or subpath is not in available configurations
-    if subpath_set not in available_configs:
-        print(f"Warning: '{subpath_set}' not found. Using 'default' instead.")
-        subpath = 'default'
 
-    print(subpath)
     print(path)
+    print(subpath_set)
+    print(split_set)
     print(start_seed)
 
     dataset = None
