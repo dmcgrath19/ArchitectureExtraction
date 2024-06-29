@@ -6,7 +6,7 @@ logging.basicConfig(level='ERROR')
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
-def parse_pilecorpus(path, subpath_set='default', start_seed=42, split_set="train"):
+def parse_pilecorpus(path, subpath_set=None, start_seed=42):
     """
     Quick and ugly parsing of a WET file.
     Tested for the May 2021 crawl.
@@ -15,17 +15,18 @@ def parse_pilecorpus(path, subpath_set='default', start_seed=42, split_set="trai
     all_texts = ""
 
     available_configs = get_dataset_config_names(path)
+    
+    # Use 'default' if no valid subpath is provided or subpath is not in available configurations
+    if subpath_set not in available_configs:
+        print(f"Warning: '{subpath_set}' not found. Using 'default' instead.")
+        subpath = 'default'
 
+    print(subpath)
     print(path)
-    print(subpath_set)
-    print(split_set)
     print(start_seed)
 
     dataset = None
-    if subpath_set != 'default':
-        dataset = load_dataset(path, subpath=subpath_set, streaming=True)
-    else:
-        dataset = load_dataset(path, split=split_set, streaming=True)
+    dataset = load_dataset(path, subpath=subpath_set, streaming=True)
 
     shuffled_dataset = dataset.shuffle(seed=start_seed)
 
@@ -35,6 +36,35 @@ def parse_pilecorpus(path, subpath_set='default', start_seed=42, split_set="trai
         all_texts+= text['text']
 
     return all_texts
+
+def parse_splitted_corpus(path, start_seed=42, split_set="train"):
+    """
+    Quick and ugly parsing of a WET file.
+    Tested for the May 2021 crawl.
+    """
+    
+    all_texts = ""
+
+    available_configs = get_dataset_config_names(path)
+    
+    # Use 'default' if no valid subpath is provided or subpath is not in available configurations
+
+    print(path)
+    print(start_seed)
+    print(split_set)
+
+    dataset = None
+    dataset = load_dataset(path, split=split_set, streaming=True)
+
+    shuffled_dataset = dataset.shuffle(seed=start_seed)
+
+    dataset_head= shuffled_dataset.skip(0)
+    dataset_head = shuffled_dataset.take(1000000)
+    for text in dataset_head:
+        all_texts+= text['text']
+
+    return all_texts
+
 
 def calculate_perplexity(sentence, model, tokenizer):
     input_ids = torch.tensor(tokenizer.encode(sentence)).unsqueeze(0)
