@@ -25,8 +25,12 @@ def parse_pilecorpus(path, subpath_set=None, start_seed=42, split_set="train"):
     print(path)
     print(start_seed)
 
-    dataset = load_dataset(path, subpath=subpath_set, split=split_set, streaming=True)
-    
+    dataset = None
+    if subpath_set:
+        dataset = load_dataset(path, subpath=subpath_set, streaming=True)
+    else:
+        dataset = load_dataset(path, split=split_set, streaming=True)
+
     shuffled_dataset = dataset.shuffle(seed=start_seed)
 
     dataset_head= shuffled_dataset.skip(0)
