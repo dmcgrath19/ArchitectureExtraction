@@ -6,77 +6,61 @@ logging.basicConfig(level='ERROR')
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
-def parse_pilecorpus(path):
+def parse_pilecorpus(path,start_seed=42):
+    """
+    This is a way for parsing the Pile corpus.
+    """
     
     all_texts = ""
     dataset = load_dataset(path, split="train", streaming=True)
-    shuffled_dataset = dataset.shuffle(seed=42)
-    dataset_head= shuffled_dataset.skip(0)
-    dataset_head = shuffled_dataset.take(1000000)
-
-    for text in dataset_head:
-        all_texts+= text['text']
-
-    return all_texts
-
-def parse_other(path, subset=None, start_seed=42):
-    """
-    Quick and ugly parsing of a WET file.
-    Tested for the May 2021 crawl.
-    """
-    
-    all_texts = ""
-
-    available_configs = get_dataset_config_names(path)
-    
-    # Use 'default' if no valid subpath is provided or subpath is not in available configurations
-    
-    print(subset)
-    print(path)
-    print(start_seed)
-
-    dataset = None
-    if subset is not None:
-        dataset = load_dataset(path, subset, streaming=True)
-    else:
-        dataset = load_dataset(path, split="train", streaming=True)
-
-
     shuffled_dataset = dataset.shuffle(seed=start_seed)
-
     dataset_head= shuffled_dataset.skip(0)
     dataset_head = shuffled_dataset.take(1000000)
+
     for text in dataset_head:
         all_texts+= text['text']
 
     return all_texts
 
-def parse_splitted_corpus(path, start_seed=42, split_set="train"):
+def parse_splitted(path, subset='default', start_seed=42):
     """
-    Quick and ugly parsing of a WET file.
-    Tested for the May 2021 crawl.
+    This is for parsing thePileSplitted dataset.
     """
     
     all_texts = ""
 
-    available_configs = get_dataset_config_names(path)
+    print(f"Subset: {subset}")
+    print(f"Path: {path}")
+    print(f"Start Seed: {start_seed}")
+
+    # Load dataset with streaming enabled
+    dataset = load_dataset(path, subset, streaming=True)
+
+    for idx, example in enumerate(dataset):
+        if idx >= 1000000:  # Limiting to 1,000,000 examples
+            break
+        all_texts += example['text']
+
+    return all_texts
+
+
+def parse_wmt_splitted(path, split_set='train'):
+    """
+    This is for getting data from KaiNylund/WMT-year-splits
+    """
+    all_texts = ""
     
-    # Use 'default' if no valid subpath is provided or subpath is not in available configurations
-
-    print(path)
-    print(start_seed)
-    print(split_set)
-
-    dataset = None
+    # Load the dataset split with streaming enabled
     dataset = load_dataset(path, split=split_set, streaming=True)
-
-    shuffled_dataset = dataset.shuffle(seed=start_seed)
-
-    dataset_head= shuffled_dataset.skip(0)
-    dataset_head = shuffled_dataset.take(1000000)
-    for text in dataset_head:
-        all_texts+= text['text']
-
+    
+    # Iterate over the dataset split and accumulate texts
+    for idx, example in enumerate(dataset):
+        all_texts += example['text']
+        
+        # Optional: Limit the number of examples processed
+        if idx >= 1000000:
+            break
+    
     return all_texts
 
 
