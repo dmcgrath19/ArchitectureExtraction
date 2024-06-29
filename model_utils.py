@@ -22,7 +22,7 @@ def parse_pilecorpus(path, subpath_set='default', start_seed=42, split_set="trai
     print(start_seed)
 
     dataset = None
-    if subpath_set is not 'default':
+    if subpath_set != 'default':
         dataset = load_dataset(path, subpath=subpath_set, streaming=True)
     else:
         dataset = load_dataset(path, split=split_set, streaming=True)
