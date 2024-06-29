@@ -6,7 +6,20 @@ logging.basicConfig(level='ERROR')
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
-def parse_pilecorpus(path, subset=None, start_seed=42):
+def parse_pilecorpus(path):
+    
+    all_texts = ""
+    dataset = load_dataset(path, split="train", streaming=True)
+    shuffled_dataset = dataset.shuffle(seed=42)
+    dataset_head= shuffled_dataset.skip(0)
+    dataset_head = shuffled_dataset.take(1000000)
+
+    for text in dataset_head:
+        all_texts+= text['text']
+
+    return all_texts
+
+def parse_other(path, subset=None, start_seed=42):
     """
     Quick and ugly parsing of a WET file.
     Tested for the May 2021 crawl.
