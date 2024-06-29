@@ -51,9 +51,10 @@ def parse_splitted(path, subset='default', max_examples=1000000, start_seed=42):
     return all_texts
 
 
-def parse_wmt_splitted(path, split_set='train', start_seed=42):
+def parse_wmt_splitted(path, split_set='train', start_seed=33):
     """
     This is for getting data from KaiNylund/WMT-year-splits
+    unseen data for the model serving as a base for perplexity
     """
 
     print("Streaming the wmt splitted dataset")
@@ -68,10 +69,8 @@ def parse_wmt_splitted(path, split_set='train', start_seed=42):
     dataset_head = shuffled_dataset.take(1000000)
 
     for text in dataset_head:
+        print("in the for loop!!!! :O ")
         all_texts+= text['text']
-
-    print("completed parsing")
-
 
     print("completed parsing")
     
