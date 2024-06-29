@@ -33,7 +33,7 @@ module load anaconda
 cd /exports/eddie/scratch/s2558433/ArchitectureExtraction/
 conda activate mamba
 
-python mamba-main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-370m-hf --corpus-path 'KaiNylund/WMT-year-splits' --corpus-subset "2021_train" --name-tag 10k-base
+python mamba-main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-370m-hf --corpus-path 'KaiNylund/WMT-year-splits' --split "2021_train" --name-tag 10k-base
 
 python mamba-main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-2.8b-hf --corpus-path 'monology/pile-uncopyrighted' --name-tag 10k-base
 

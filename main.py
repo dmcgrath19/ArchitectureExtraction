@@ -185,7 +185,7 @@ def parse_arguments(argv):
     parser.add_argument('--name-tag', type=str, required=False, help="Path to the corpus dataset")
     parser.add_argument('--random-seed', type=int, required=False, help="Random seed for dataset shuffling")
     parser.add_argument('--is-mamba', action='store_true', help="Determine type of tokeniser")
-    parser.add_argument('--split', type=int, required=False, help="Split for dataset")
+    parser.add_argument('--split', type=str, required=False, help="Split for dataset")
 
 
     return parser.parse_args(argv)
