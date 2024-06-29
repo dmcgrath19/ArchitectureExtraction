@@ -10,6 +10,7 @@ def parse_pilecorpus(path,start_seed=42):
     """
     This is a way for parsing the Pile corpus.
     """
+    print("Streaming the main pile corpus")
     
     all_texts = ""
     dataset = load_dataset(path, split="train", streaming=True)
@@ -26,6 +27,8 @@ def parse_splitted(path, subset='default', start_seed=42):
     """
     This is for parsing thePileSplitted dataset.
     """
+    print("Streaming the splitted pile")
+
     
     all_texts = ""
 
@@ -48,6 +51,9 @@ def parse_wmt_splitted(path, split_set='train'):
     """
     This is for getting data from KaiNylund/WMT-year-splits
     """
+
+    print("Streaming the wmt splitted dataset")
+
     all_texts = ""
     
     # Load the dataset split with streaming enabled
