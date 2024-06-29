@@ -56,7 +56,7 @@ def main(args):
 
                 prompt_ids= token_ids[:input_len]
                 if prompt_ids.shape[0] < input_len:
-                    continue  # Skip shoer prompts
+                    continue  # Skip shorter prompts
 
                 prompt= tokenizer.decode(prompt_ids, skip_special_tokens=True)
                 
@@ -177,6 +177,8 @@ def parse_arguments(argv):
     parser.add_argument('--corpus-subset', type=str, required=False, help="data subset if using splitted data")
     parser.add_argument('--name-tag', type=str, required=False, help="Path to the corpus dataset")
     parser.add_argument('--random-seed', type=int, required=False, help="Random seed for dataset shuffling")
+    parser.add_argument('--split', type=int, required=False, help="Split for dataset")
+
 
     return parser.parse_args(argv)
 

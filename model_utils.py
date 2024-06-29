@@ -6,7 +6,7 @@ logging.basicConfig(level='ERROR')
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
-def parse_pilecorpus(path, subpath=None, start_seed=42):
+def parse_pilecorpus(path, subpath_set=None, start_seed=42, split_set="train"):
     """
     Quick and ugly parsing of a WET file.
     Tested for the May 2021 crawl.
@@ -17,15 +17,15 @@ def parse_pilecorpus(path, subpath=None, start_seed=42):
     available_configs = get_dataset_config_names(path)
     
     # Use 'default' if no valid subpath is provided or subpath is not in available configurations
-    if subpath not in available_configs:
-        print(f"Warning: '{subpath}' not found. Using 'default' instead.")
+    if subpath_set not in available_configs:
+        print(f"Warning: '{subpath_set}' not found. Using 'default' instead.")
         subpath = 'default'
 
     print(subpath)
     print(path)
     print(start_seed)
 
-    dataset = load_dataset(path, split="train", streaming=True)
+    dataset = load_dataset(path, subpath=subpath_set, split=split_set, streaming=True)
     
     shuffled_dataset = dataset.shuffle(seed=start_seed)
 
