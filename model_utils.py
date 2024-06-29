@@ -69,7 +69,6 @@ def parse_wmt_splitted(path, split_set='train', start_seed=33):
     dataset_head = shuffled_dataset.take(1000000)
 
     for text in dataset_head:
-        print("in the for loop!!!! :O ")
         all_texts+= text['text']
 
     print("completed parsing")
