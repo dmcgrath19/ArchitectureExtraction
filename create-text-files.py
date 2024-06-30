@@ -10,7 +10,7 @@ def parse_pilecorpus(path,start_seed=42):
     dataset = load_dataset(path, split="train", streaming=True)
     shuffled_dataset = dataset.shuffle(seed=start_seed)
     dataset_head= shuffled_dataset.skip(0)
-    dataset_head = shuffled_dataset.take(1000000)
+    dataset_head = shuffled_dataset.take(100000)
 
     for text in dataset_head:
         all_texts+= text['text']
@@ -34,7 +34,7 @@ def parse_splitted(path, subset='default', max_examples=1000000, start_seed=42):
 
     shuffled_dataset = dataset.shuffle(seed=start_seed)
     dataset_head= shuffled_dataset.skip(0)
-    dataset_head = shuffled_dataset.take(1000000)
+    dataset_head = shuffled_dataset.take(100000)
 
     for text in dataset_head:
         all_texts+= text['text']
@@ -60,7 +60,7 @@ def parse_wmt_splitted(path, split_set='train', start_seed=33):
     
     shuffled_dataset = dataset.shuffle(seed=start_seed)
     dataset_head= shuffled_dataset.skip(0)
-    dataset_head = shuffled_dataset.take(1000000)
+    dataset_head = shuffled_dataset.take(100000)
 
     for text in dataset_head:
         all_texts+= text['text']
