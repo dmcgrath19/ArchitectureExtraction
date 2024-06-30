@@ -23,6 +23,26 @@ def parse_pilecorpus(path,start_seed=42):
 
     return all_texts
 
+def parse_local(path):
+    file_content=""
+    chunk_size = 10 * 1024 * 1024  # 10 MB
+
+    try:
+        with open(path, 'r', encoding='utf-8') as file:
+            while True:
+                chunk = file.read(chunk_size)
+                if not chunk:
+                    break 
+                
+                file_content += chunk
+        print("File read successfully.")
+    except FileNotFoundError:
+        print(f"The file at {path} was not found.")
+    except IOError as e:
+        print(f"An error occurred while reading the file at {path}: {e}")
+    
+    return file_content
+
 
 def parse_splitted(path, subset='default', max_examples=1000000, start_seed=42):
     """
