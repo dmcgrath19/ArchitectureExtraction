@@ -29,6 +29,8 @@ cd /exports/eddie/scratch/s2558433/ArchitectureExtraction/
 #conda create -n mamba python=3.9
 conda activate mamba
 
+conda install nvidia::cuda-toolkit=12.1
+
 pip install causal-conv1d>=1.2.0
 pip install mamba-ssm
 
