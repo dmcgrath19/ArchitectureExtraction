@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Use the variable for the job name and log/error files
-#$ -N SUB-PY-410
+#$ -N subpy-410
 #$ -o /exports/eddie/scratch/s2558433/job_runs/SUBPY-$JOB_ID.log
 #$ -e /exports/eddie/scratch/s2558433/job_runs/SUBPY-$JOB_ID.err
 #$ -cwd
@@ -28,6 +28,7 @@ python main.py --N 10000 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model
 
 python main.py --N 10000 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model2 EleutherAI/pythia-410m --corpus-path "ArmelR/the-pile-splitted" --corpus-subset "Wikipedia (en)" --name-tag "10kwiki" --is-splitted
 
-python main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-370m-hf --corpus-path 'KaiNylund/WMT-year-splits' --split "2021_train" --name-tag 10k-base --is-mamba --is-wmt
+python main.py --N 10000 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model2 EleutherAI/pythia-410m --corpus-path "ArmelR/the-pile-splitted" --corpus-subset "DM Mathematics" --name-tag "10kDM" --is-mamba --is-splitted
+
 
 conda deactivate 
