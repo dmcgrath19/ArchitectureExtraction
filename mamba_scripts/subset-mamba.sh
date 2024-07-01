@@ -29,12 +29,12 @@ cd /exports/eddie/scratch/s2558433/ArchitectureExtraction/
 #conda create -n mamba python=3.9
 conda activate mamba
 
-conda install nvidia::cuda-toolkit=12.1
+# conda install nvidia::cuda-toolkit=12.1
 
-pip install causal-conv1d>=1.2.0
-pip install mamba-ssm
+# pip install causal-conv1d>=1.4.0
+# pip install mamba-ssm
 
-pip install -r requirements.txt
+# pip install -r requirements.txt
 
 python main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-370m-hf --corpus-path "ArmelR/the-pile-splitted" --corpus-subset "DM Mathematics" --name-tag "10kDM" --is-mamba --is-splitted
 
