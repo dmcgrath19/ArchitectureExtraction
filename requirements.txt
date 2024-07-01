@@ -1,12 +1,6 @@
 torch
-torchvision
-torchaudio
 transformers
 numpy
 tqdm
 zstandard
 datasets
-scipy
-tokenizers
-pandas
-accelerate
