@@ -46,7 +46,7 @@ def parse_local(path):
 
 def parse_splitted(path, subset='default', max_examples=1000000, start_seed=42):
     """
-    This is for parsing thePileSplitted dataset.
+    This is for parsing the PileSplitted dataset.
     """
     print("Streaming the splitted pile")
     
@@ -57,16 +57,16 @@ def parse_splitted(path, subset='default', max_examples=1000000, start_seed=42):
     print(f"Path: {path}")
 
     # Load the dataset subset with streaming enabled
-    dataset = load_dataset(path, subset,split="train", streaming=True)
+    dataset = load_dataset(path, subset, split="train", streaming=True)
 
     shuffled_dataset = dataset.shuffle(seed=start_seed)
-    dataset_head= shuffled_dataset.skip(0)
-    dataset_head = shuffled_dataset.take(1000000)
+    dataset_head = shuffled_dataset.skip(0).take(max_examples)
 
     for text in dataset_head:
-        all_texts+= text['text']
+        # Replace newline characters with spaces
+        all_texts += text['text'].replace('\n', ' ')
 
-    print("completed parsing")
+    print("Completed parsing")
 
     return all_texts
 
@@ -77,21 +77,21 @@ def parse_wmt_splitted(path, split_set='train', start_seed=33):
     unseen data for the model serving as a base for perplexity
     """
 
-    print("Streaming the wmt splitted dataset")
+    print("Streaming the WMT splitted dataset")
 
     all_texts = ""
-    
+
     # Load the dataset split with streaming enabled
     dataset = load_dataset(path, split=split_set, streaming=True)
     
     shuffled_dataset = dataset.shuffle(seed=start_seed)
-    dataset_head= shuffled_dataset.skip(0)
-    dataset_head = shuffled_dataset.take(1000000)
+    dataset_head = shuffled_dataset.skip(0).take(1000000)
 
     for text in dataset_head:
-        all_texts+= text['text']
+        # Replace newline characters with spaces
+        all_texts += text['text'].replace('\n', ' ')
 
-    print("completed parsing")
+    print("Completed parsing")
     
     return all_texts
 
