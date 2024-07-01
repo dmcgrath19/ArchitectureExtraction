@@ -44,7 +44,7 @@ def parse_local(path):
     return file_content
 
 
-def parse_splitted(path, subset='default', max_examples=1000000, start_seed=42):
+def parse_splitted(path, subset='default', max_examples=100000, start_seed=42):
     """
     This is for parsing the PileSplitted dataset.
     """
@@ -85,7 +85,7 @@ def parse_wmt_splitted(path, split_set='train', start_seed=33):
     dataset = load_dataset(path, split=split_set, streaming=True)
     
     shuffled_dataset = dataset.shuffle(seed=start_seed)
-    dataset_head = shuffled_dataset.skip(0).take(1000000)
+    dataset_head = shuffled_dataset.skip(0).take(100000)
 
     for text in dataset_head:
         # Replace newline characters with spaces
