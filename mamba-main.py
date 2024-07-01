@@ -57,17 +57,20 @@ def main(args):
                 # Sample random text from the Pile corpus
                 r = np.random.randint(0, len(ds))
                 
-                chunk = " ".join(ds[r:r+10000].split(" ")[1:-1])
+                # print("*"*100)
+                # print("The index Selected is:", r)
                 
+                
+                chunk = " ".join(ds[r:r+10000].split(" ")[1:-1])
                 tokenized_chunk = tokenizer(chunk, return_tensors="pt")
                 token_ids= tokenized_chunk['input_ids'][0]
 
                 prompt_ids= token_ids[:input_len]
                 if prompt_ids.shape[0] < input_len:
-                    continue  # Skip shorter prompts
-
+                    continue  # Skip short prompts
                 prompt= tokenizer.decode(prompt_ids, skip_special_tokens=True)
-                
+                # print("the lenght of tokenized prompt is:", len(inputs))
+                # print(inputs)
                 suffix_ids= token_ids[input_len:input_len+ 50 ]
                 suffix= tokenizer.decode(suffix_ids, skip_special_tokens=True)
 
@@ -76,19 +79,11 @@ def main(args):
                 attention_mask.append(torch.ones_like(prompt_ids))
                 prompts_list.append(prompt)
                 prompt_suffix.append(suffix)
-
-            print("\n\n*** THIS FOR DEBUGGING ***")
-            print(args.corpus_path)
-            print(args.corpus_subset)
-            print(args.model2)
-
-            print("Input IDs shape:", torch.stack(input_ids).shape)
             
-            print("Attention Mask shape:", torch.stack(attention_mask).shape)
-    
-                
+
 
             inputs = {'input_ids': torch.stack(input_ids), 'attention_mask': torch.stack(attention_mask)}
+            
             
             print("Attention Mask shape:", inputs['attention_mask'].shape)
         
@@ -102,7 +97,6 @@ def main(args):
             )
 
             texts = [tokenizer.decode(seq, skip_special_tokens=True) for seq in output_sequences]
-            
             for text in texts:
                 p1 = calculate_perplexity(text, model1, tokenizer)
                 p2 = calculate_perplexity(text, model2, tokenizer)
@@ -128,6 +122,8 @@ def main(args):
     model1_name = args.model1.replace("/", "_")
     model2_name = args.model2.replace("/", "_")
 
+    
+   
     sample_test = [s[input_len:input_len+50] for s in samples]
     
     comparison_result = [1 if sample == prompt else 0 for sample, prompt in zip(sample_test, prompt_suffix)]
@@ -136,22 +132,26 @@ def main(args):
     total_count = len(comparison_result)
     memorization = (ones_count / total_count) * 100
     
+    
     print("Memorization is: "  , memorization)
     # prompts_list = [item for sublist in prompts_list for item in sublist]
     print("*"*100)
     print("Number of prompts are:", len(prompts_list))
     print("Prompts_list is: ", prompts_list)
-    
+    # # print("*"*100)
+    # print("Number of Prompt Suffix are:", len(prompt_suffix))
+
     output_csv = f'output_scores_{model1_name}_{model2_name}_{args.name_tag}.csv'
+    
     with open(output_csv, 'w', newline='') as csvfile:
-        fieldnames = ['sample', 'prompt','PPL_XL', 'PPL_S', 'PPL_Lower', 'Zlib']
+        fieldnames = ['sample', 'prompt', 'suffix', 'memorized', 'PPL_XL', 'PPL_S', 'PPL_Lower', 'Zlib']
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         writer.writeheader()
-        for sample, prompt, xl, s, lower, zlib_ in zip(samples, prompts_list, scores["XL"], scores["S"], scores["Lower"], scores["zlib"]):
-            writer.writerow({'sample': sample, 'prompt': prompt,'PPL_XL': xl, 'PPL_S': s, 'PPL_Lower': lower, 'Zlib': zlib_})
+        for sample,prompt,suff, mem, xl, s, lower, zlib_ in zip(samples, prompts_list, prompt_suffix, comparison_result, scores["XL"], scores["S"], scores["Lower"], scores["zlib"]):
+            writer.writerow({'sample': sample, 'prompt': prompt, 'suffix': suff, 'memorized': mem, 'PPL_XL': xl, 'PPL_S': s, 'PPL_Lower': lower, 'Zlib': zlib_})
 
     print("Results saved to ", output_csv)
-
+    
     output_txt = f'output_results_{model1_name}_{model2_name}_{args.name_tag}.txt'
     with open(output_txt, 'w') as f:
         metric = -np.log(scores["XL"])
@@ -172,6 +172,9 @@ def main(args):
         metric = scores["zlib"] / np.log(scores["XL"])
         f.write(f"======== top sample by ratio of Zlib entropy and XL perplexity: ========\n")
         f.write(print_best(metric, samples, "PPL-XL", scores["XL"], "Zlib", scores["zlib"]))
+
+        f.write(f"======== Percentage of memorization is: ========\n")
+        f.write(f"========{memorization}")
 
     print("Top results written to ", output_txt)
 
