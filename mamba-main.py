@@ -7,12 +7,20 @@ import csv
 from datasets import load_dataset
 from transformers import  MambaConfig, MambaForCausalLM, AutoTokenizer
 from tqdm import tqdm
-from model_utils import calculate_perplexity, print_best, parse_pilecorpus, device
+from model_utils import calculate_perplexity, print_best, parse_pilecorpus,parse_local,parse_splitted,parse_wmt_splitted, device
 
 def main(args):
     print(f"Using device: {device}")
     print("Loading dataset...")
-    ds= parse_pilecorpus(path=args.corpus_path, subpath=args.corpus_subset, start_seed=args.random_seed)
+
+    if args.local_text:
+        ds = parse_local(path=args.local_text)
+    elif args.is_splitted:
+        ds= parse_splitted(path=args.corpus_path, subset=args.corpus_subset)
+    elif args.is_wmt:
+        ds= parse_wmt_splitted(path=args.corpus_path, split_set=args.split)
+    else:
+        ds= parse_pilecorpus(path = args.corpus_path, start_seed=args.random_seed)
     print("Length:", len(ds))
    
     seq_len = 256
@@ -178,6 +186,9 @@ def parse_arguments(argv):
     parser.add_argument('--name-tag', type=str, required=False, help="Path to the corpus dataset")
     parser.add_argument('--random-seed', type=int, required=False, help="Random seed for dataset shuffling")
     parser.add_argument('--split', type=str, required=False, help="Split for dataset")
+    parser.add_argument('--is-splitted', action='store_true', help="Determine type of dataset parsing")
+    parser.add_argument('--is-wmt',  action='store_true', help="Determine type of dataset parsing")
+    parser.add_argument('--local-text', type=str, required=False, help="local text file")
 
 
     return parser.parse_args(argv)
