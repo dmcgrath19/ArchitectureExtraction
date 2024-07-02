@@ -1,13 +1,13 @@
 #!/bin/bash
 
 # Use the variable for the job name and log/error files
-#$ -N low-mamba
-#$ -o /exports/eddie/scratch/s2558433/job_runs/submam_$JOB_ID.log
-#$ -e /exports/eddie/scratch/s2558433/job_runs/submam_$JOB_ID.err
+#$ -N small-mamba
+#$ -o /exports/eddie/scratch/s2558433/job_runs/supersmall-$JOB_ID.log
+#$ -e /exports/eddie/scratch/s2558433/job_runs/supersmall-$JOB_ID.err
 #$ -cwd
 #$ -q gpu
 #$ -pe gpu-a100 1
-#$ -l h_vmem=500G
+#$ -l h_vmem=200G
 #$ -l h_rt=24:00:00
 #$ -m bea -M s2558433@ed.ac.uk 
 
@@ -40,11 +40,11 @@ conda activate mamba
 
 # pip install -r requirements.txt
 
-python main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-160m-hf --corpus-path "monology/pile-uncopyrighted" --name-tag "10kpile" --is-mamba
+python main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-130m-hf --corpus-path "monology/pile-uncopyrighted" --name-tag "10kpile" --is-mamba
 
-python main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-370m-hf --corpus-path "monology/pile-uncopyrighted" --name-tag "10kpile" --is-mamba
+# python main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-370m-hf --corpus-path "monology/pile-uncopyrighted" --name-tag "10kpile" --is-mamba
 
-python main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-790m-hf --corpus-path "monology/pile-uncopyrighted" --name-tag "10kpile" --is-mamba
+# python main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-790m-hf --corpus-path "monology/pile-uncopyrighted" --name-tag "10kpile" --is-mamba
 
 
 
