@@ -32,12 +32,12 @@ conda activate pythia
 
 #python main.py --N 10000 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model2 EleutherAI/pythia-410m --corpus-path "ArmelR/the-pile-splitted" --corpus-subset "DM Mathematics" --name-tag "problem-withDM"
 
-python main.py --N 10000 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model2 EleutherAI/pythia-2.8b --corpus-path "monology/pile-uncopyrighted" --name-tag "10kpile" --is-splitted
+python main.py --N 10000 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model2 EleutherAI/pythia-2.8b --corpus-path "monology/pile-uncopyrighted" --name-tag "10kpile-2.0"
 
-python main.py --N 10000 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model2 EleutherAI/pythia-1b --corpus-path "monology/pile-uncopyrighted" --corpus-subset "Wikipedia (en)" --name-tag "10kpile" --is-splitted
+python main.py --N 10000 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model2 EleutherAI/pythia-1b --corpus-path "monology/pile-uncopyrighted" --name-tag "10kpile-2.0"
 
 
-python main.py --N 10000 --batch-size 10 -model1 EleutherAI/pythia-2.8b --model2 EleutherAI/pythia-410m --corpus-path 'KaiNylund/WMT-year-splits' --split "2021_train" --name-tag 10k-base --is-mamba --is-wmt
+python main.py --N 10000 --batch-size 10 -model1 EleutherAI/pythia-2.8b --model2 EleutherAI/pythia-410m --corpus-path 'KaiNylund/WMT-year-splits' --split "2021_train" --name-tag '10k-base-2.0' --is-wmt
 
 # mv output*.txt output*.csv /exports/e≈ddie/scratch/s2558433/ArchitectureExtraction/prev-runs/pythia-410/
 
