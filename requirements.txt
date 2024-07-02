@@ -4,5 +4,4 @@ numpy
 tqdm
 zstandard
 datasets
-causal-conv1d>=1.4.0
-mamba-ssm
+
