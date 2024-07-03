@@ -92,4 +92,26 @@ Copy multiple files from the remote host to your current directory on the local 
  .
 More examples can be found at http://www.hypexr.org/linux_scp_help.php. If a command is not working on Eddie, try it on the local host instead.
 
+*****
 
+For the Mamba enviornment:
+
+conda create -n mambathree python=3.9
+
+conda activate mambathree
+
+conda install -c conda-forge pycairo pygobject manimpango -y
+conda install pytorch torchvision torchaudio pytorch-cuda=12.1 -c pytorch-nightly -c nvidia -y
+
+
+conda install transformers=4.40.1
+
+pip install --upgrade pip
+pip install torch
+pip install -r requirements
+pip install --upgrade datasets
+pip install causal-conv1d>=1.2.0
+pip install mamba-ssm
+
+
+(The new transformers version 4.42.3 seems to cause errors when setting attention mask & trying with a higher python version caused dependency conflicts? This method worked ^)
