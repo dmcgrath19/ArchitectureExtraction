@@ -32,7 +32,8 @@ module load anaconda
 
 cd /exports/eddie/scratch/s2558433/ArchitectureExtraction/
 
-conda create -n newmamba python=3.10.13
+# conda create -n newmamba python=3.10.13
+conda activate newmamba
 
 pip install --upgrade pip
 
