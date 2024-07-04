@@ -25,27 +25,15 @@ export TOKENIZERS_PARALLELISM=false
 module unload cuda
 
 module load cuda/12.1.1
-#qlogin -q gpu -pe gpu-a100 1 -l h_vmem=500G -l h_rt=24:00:00
 
-source /exports/eddie/scratch/s2558433/miniconda3/etc/profile.d/conda.sh
-module load anaconda
 
-cd /exports/eddie/scratch/s2558433/ArchitectureExtraction/
-conda activate mambathree
-
-# conda install nvidia::cuda-toolkit=12.1
-
-# pip install causal-conv1d>=1.4.0
-# pip install mamba-ssm
-
-# pip install -r requirements.txt
+conda activate mambafour
 
 python main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-130m-hf --corpus-path "monology/pile-uncopyrighted" --name-tag "10kpile" --is-mamba
 
 python main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-790m-hf --corpus-path "monology/pile-uncopyrighted" --name-tag "10kpile" --is-mamba
 
-python main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-2.8b-hf --corpus-path "monology/pile-uncopyrighted" --name-tag "10kpile" --is-mamba
-
+python main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-2.8b-hf --corpus-path "monology/pile-uncopyrighted" --name-tag "10kpile-2" --is-mamba
 
 
 
