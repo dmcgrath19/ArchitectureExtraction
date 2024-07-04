@@ -154,7 +154,7 @@ def main(args):
     
     with open(output_csv, 'w', newline='') as csvfile:
         fieldnames = ['sample', 'prompt', 'suffix', 'memorized', 'PPL_XL', 'PPL_S', 'PPL_Lower', 'Zlib']
-        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames, quoting=csv.QUOTE_MINIMAL, quotechar='"', escapechar='\\') # Must prepare for the worst
         writer.writeheader()
         for sample,prompt,suff, mem, xl, s, lower, zlib_ in zip(samples, prompts_list, prompt_suffix, comparison_result, scores["XL"], scores["S"], scores["Lower"], scores["zlib"]):
             writer.writerow({'sample': sample, 'prompt': prompt, 'suffix': suff, 'memorized': mem, 'PPL_XL': xl, 'PPL_S': s, 'PPL_Lower': lower, 'Zlib': zlib_})
