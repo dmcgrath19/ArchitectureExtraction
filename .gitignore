@@ -1,7 +1,6 @@
-Results/*
+ArchitectureExtraction/*
+local-data/*
 *.log
 *.csv
 *.err
-data/*
-misc/*
 *.txt

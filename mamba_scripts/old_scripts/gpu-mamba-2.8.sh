@@ -38,7 +38,7 @@ conda activate mamba
 #pip install -r requirements.txt
 
 # Run the main script
-python mamba-main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-2.8b-hf --corpus-path monology/pile-uncopyrighted --name-tag 10k-pile-1 --random-seed 33
+python main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-2.8b-hf --corpus-path monology/pile-uncopyrighted --name-tag 10k-pile-1 --random-seed 33
 mv output*.txt output*.csv /prev-runs/mamba-2.8/
 
 python mamba-main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-2.8b-hf --corpus-path monology/pile-uncopyrighted --name-tag 10k-pile-2 --random-seed 36

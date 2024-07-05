@@ -72,7 +72,6 @@ def parse_wmt_splitted(path, split_set='train', start_seed=33):
 git = parse_splitted(path="ArmelR/the-pile-splitted", subset="Github")
 wiki = parse_splitted(path="ArmelR/the-pile-splitted", subset="Wikipedia (en)")
 dm = parse_splitted(path="ArmelR/the-pile-splitted", subset="DM Mathematics")
-
 wmt = parse_wmt_splitted(path='KaiNylund/WMT-year-splits', split_set="2021_train")
 
 with open('wmt.txt', 'w') as file:

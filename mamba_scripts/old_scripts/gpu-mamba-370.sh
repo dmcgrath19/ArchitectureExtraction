@@ -24,7 +24,7 @@ export TOKENIZERS_PARALLELISM=false
 . /etc/profile.d/modules.sh
 module unload cuda
 
-module load cuda/12.1.1
+module load cuda/11.0.2
 #qlogin -q gpu -pe gpu-a100 1 -l h_vmem=500G -l h_rt=24:00:00
 
 source /exports/eddie/scratch/s2558433/miniconda3/etc/profile.d/conda.sh

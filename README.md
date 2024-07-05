@@ -104,7 +104,8 @@ conda install -c conda-forge pycairo pygobject manimpango -y
 conda install pytorch torchvision torchaudio pytorch-cuda=12.1 -c pytorch-nightly -c nvidia -y
 
 
-conda install transformers=4.40.1
+
+pip install transformers==4.40.1
 
 pip install --upgrade pip
 pip install torch
@@ -115,3 +116,7 @@ pip install mamba-ssm
 
 
 (The new transformers version 4.42.3 seems to cause errors when setting attention mask & trying with a higher python version caused dependency conflicts? This method worked ^)
+
+
+
+pip3 install torch torchvision torchaudio
