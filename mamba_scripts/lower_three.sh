@@ -26,7 +26,10 @@ module unload cuda
 
 module load cuda/12.1.1
 
+source /exports/eddie/scratch/s2558433/miniconda3/etc/profile.d/conda.sh
+module load anaconda
 
+cd /exports/eddie/scratch/s2558433/ArchitectureExtraction/
 conda activate mambafour
 
 python main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-130m-hf --corpus-path "monology/pile-uncopyrighted" --name-tag "10kpile" --is-mamba
