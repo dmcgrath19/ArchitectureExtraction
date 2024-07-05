@@ -32,15 +32,18 @@ module load anaconda
 
 cd /exports/eddie/scratch/s2558433/ArchitectureExtraction/
 
-conda activate mambafour
-
-
-python main.py --N 100 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-370m-hf --corpus-path 'KaiNylund/WMT-year-splits' --split "2021_train" --name-tag 10k-base --is-mamba --is-wmt
-
-conda deactivate
-
 conda activate pythia
 
 python main.py --N 100 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model2 EleutherAI/pythia-410m --corpus-path 'KaiNylund/WMT-year-splits' --split "2021_train" --name-tag 10k-base --is-wmt
+
+python main.py --N 10000 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model2 EleutherAI/pythia-1b --corpus-path "monology/pile-uncopyrighted" --name-tag "10kpile-2.0" 
+
+python main.py --N 10000 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model2 EleutherAI/pythia-1b --corpus-path "monology/pile-uncopyrighted"  --name-tag "10kpile-3.0" 
+
+python main.py --N 10000 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model2 EleutherAI/pythia-160m --corpus-path "monology/pile-uncopyrighted" --name-tag "10kpile-2.0" 
+
+python main.py --N 10000 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model2 EleutherAI/pythia-160m --corpus-path "monology/pile-uncopyrighted" --name-tag "10kpile-3.0" 
+
+
 
 conda deactivate

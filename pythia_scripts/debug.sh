@@ -17,34 +17,28 @@ export HF_DATASETS_CACHE="/exports/eddie/scratch/s2558433/.cache/huggingface_cac
 export PIP_CACHE_DIR="/exports/eddie/scratch/s2558433/.cache/pip"
 export CONDA_PKGS_DIRS="/exports/eddie/scratch/s2558433/.cache/conda_pkgs"
 
+export CXXFLAGS="-std=c99"
+export CFLAGS="-std=c99"
+export TOKENIZERS_PARALLELISM=false
+
+. /etc/profile.d/modules.sh
+module unload cuda
+module load cuda/12.1.1
+
 source /exports/eddie/scratch/s2558433/miniconda3/etc/profile.d/conda.sh
+module load anaconda
 
 cd /exports/eddie/scratch/s2558433/ArchitectureExtraction/
-#conda remove --name extract --all
-
-#conda create -n pythia python=3.9 
 
 conda activate pythia
 
-#pip install -r requirements.txt
+python main.py --N 10000 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model2 EleutherAI/pythia-1.4b --corpus-path "monology/pile-uncopyrighted" --name-tag "10kpile-2.0" 
 
-# Run the main script
+python main.py --N 10000 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model2 EleutherAI/pythia-1.4b --corpus-path "monology/pile-uncopyrighted"  --name-tag "10kpile-3.0" 
 
-#python main.py --N 10000 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model2 EleutherAI/pythia-410m --corpus-path "ArmelR/the-pile-splitted" --corpus-subset "DM Mathematics" --name-tag "problem-withDM"
+python main.py --N 10000 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model2 EleutherAI/pythia-2.8b --corpus-path "monology/pile-uncopyrighted" --name-tag "10kpile-3.0" 
 
-python main.py --N 10000 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model2 EleutherAI/pythia-2.8b --corpus-path "monology/pile-uncopyrighted" --name-tag "10kpile-2.0"
-
-python main.py --N 10000 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model2 EleutherAI/pythia-1b --corpus-path "monology/pile-uncopyrighted" --name-tag "10kpile-2.0"
+python main.py --N 10000 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model2 EleutherAI/pythia-410m --corpus-path "monology/pile-uncopyrighted" --name-tag "10kpile-3.0" 
 
 
-python main.py --N 10000 --batch-size 10 -model1 EleutherAI/pythia-2.8b --model2 EleutherAI/pythia-410m --corpus-path 'KaiNylund/WMT-year-splits' --split "2021_train" --name-tag '10k-base-2.0' --is-wmt
-
-# mv output*.txt output*.csv /exports/e≈ddie/scratch/s2558433/ArchitectureExtraction/prev-runs/pythia-410/
-
-# python pythia-main.py --N 10000 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model2 EleutherAI/pythia-410m --corpus-path "ArmelR/the-pile-splitted" --corpus-subset "Github" --name-tag "10k-git"
-# # mv output*.txt output*.csv /exports/eddie/scratch/s2558433/ArchitectureExtraction/prev-runs/pythia-410/
-
-# python pythia-main.py --N 10000 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model2 EleutherAI/pythia-410m --corpus-path "ArmelR/the-pile-splitted" --corpus-subset "Wikipedia (en)" --name-tag "10k-wiki"
-# # mv output*.txt output*.csv /exports/eddie/scratch/s2558433/ArchitectureExtraction/prev-runs/pythia-410/
-
-conda deactivate 
+conda deactivate
