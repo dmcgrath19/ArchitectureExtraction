@@ -39,7 +39,7 @@ python main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --m
 
 python main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-2.8b-hf --corpus-path "ArmelR/the-pile-splitted" --corpus-subset "Enron Emails" --name-tag "10kenron" --is-mamba --is-splitted
 
-python main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-2.8b-hf --corpus-path "ArmelR/the-pile-splitted" --corpus-subset "Gutenberg PG(19)" --name-tag "10kgutenberg" --is-mamba --is-splitted
+python main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-2.8b-hf --corpus-path "ArmelR/the-pile-splitted" --corpus-subset "Gutenberg (PG-19)" --name-tag "10kgutenberg" --is-mamba --is-splitted
 
 
 python main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-2.8b-hf --corpus-path "ArmelR/the-pile-splitted" --corpus-subset "DM Mathematics" --is-mamba --name-tag "10kDM" --is-splitted
