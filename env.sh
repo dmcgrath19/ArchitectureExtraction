@@ -20,14 +20,18 @@ export STUDENT_ID=$(whoami)
 echo "Loading module environment..."
 . /etc/profile.d/modules.sh
 
-# List all available modules and capture output to job_output.out
+# File to store the output
+output_file="job_output.out"
+
+# Print a message indicating listing of available modules
 echo "Listing all available modules..."
-module avail >> job_output.out
+# Append available module information to the output file
+module avail >> "$output_file"
 
-# Check currently loaded modules and capture output to job_output.out
+# Print a message indicating checking of currently loaded modules
 echo "Checking currently loaded modules..."
-module list >> job_output.out
-
+# Append currently loaded module information to the output file
+module list >> "$output_file"
 
 module avail cuda
 
