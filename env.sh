@@ -17,16 +17,17 @@ export STUDENT_ID=$(whoami)
 # export PATH=${CUDA_HOME}/bin:${PATH}
 # export PYTHON_PATH=$PATH
 
+echo "Loading module environment..."
+. /etc/profile.d/modules.sh
 
+# List all available modules and capture output to job_output.out
+echo "Listing all available modules..."
+module avail >> job_output.out
 
-# Load the module environment
-if [ -f /etc/profile.d/modules.sh ]; then
-    . /etc/profile.d/modules.sh
-    echo "Module environment loaded."
-else
-    echo "Error: /etc/profile.d/modules.sh not found."
-    exit 1
-fi
+# Check currently loaded modules and capture output to job_output.out
+echo "Checking currently loaded modules..."
+module list >> job_output.out
+
 
 module avail cuda
 
