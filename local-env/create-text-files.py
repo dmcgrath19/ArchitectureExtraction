@@ -10,7 +10,7 @@ def parse_pilecorpus(path,start_seed=42):
     dataset = load_dataset(path, split="train", streaming=True)
     shuffled_dataset = dataset.shuffle(seed=start_seed)
     dataset_head= shuffled_dataset.skip(0)
-    dataset_head = shuffled_dataset.take(100000)
+    dataset_head = shuffled_dataset.take(60000)
 
     for text in dataset_head:
         all_texts+= text['text']
@@ -69,24 +69,28 @@ def parse_wmt_splitted(path, split_set='train', start_seed=33):
     
     return all_texts
 
-git = parse_splitted(path="ArmelR/the-pile-splitted", subset="Github")
-wiki = parse_splitted(path="ArmelR/the-pile-splitted", subset="Wikipedia (en)")
-dm = parse_splitted(path="ArmelR/the-pile-splitted", subset="DM Mathematics")
-wmt = parse_wmt_splitted(path='KaiNylund/WMT-year-splits', split_set="2021_train")
+pile = parse_pilecorpus(path='monology/pile-uncopyrighted')
+# git = parse_splitted(path="ArmelR/the-pile-splitted", subset="Github")
+# wiki = parse_splitted(path="ArmelR/the-pile-splitted", subset="Wikipedia (en)")
+# dm = parse_splitted(path="ArmelR/the-pile-splitted", subset="DM Mathematics")
+# wmt = parse_wmt_splitted(path='KaiNylund/WMT-year-splits', split_set="2021_train")
 
-with open('wmt.txt', 'w') as file:
+# with open('wmt.txt', 'w') as file:
+#     # Write the string to the file
+#     file.write(wmt)
+
+# with open('git.txt', 'w') as file:
+#     # Write the string to the file
+#     file.write(git)
+
+# with open('wiki.txt', 'w') as file:
+#     # Write the string to the file
+#     file.write(wiki)
+
+# with open('dm.txt', 'w') as file:
+#     # Write the string to the file
+#     file.write(dm)
+
+with open('pile.txt', 'w') as file:
     # Write the string to the file
-    file.write(wmt)
-
-with open('git.txt', 'w') as file:
-    # Write the string to the file
-    file.write(git)
-
-with open('wiki.txt', 'w') as file:
-    # Write the string to the file
-    file.write(wiki)
-
-with open('dm.txt', 'w') as file:
-    # Write the string to the file
-    file.write(dm)
-
+    file.write(pile)

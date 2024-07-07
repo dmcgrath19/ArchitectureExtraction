@@ -1,40 +1,14 @@
 #!/bin/sh
-#SBATCH -N 1	  # nodes requested
-#SBATCH -n 1	  # tasks requested
+
 #SBATCH --partition=Teach-Standard
-#SBATCH --gres=gpu:a6000:1
-#SBATCH --mem=12000  # memory in Mb
-#SBATCH --time=0-08:00:00
+#SBATCH --gres=gpu:1
 
-export CUDA_HOME=/opt/cuda-9.0.176.1/
+python mlp-main.py --N 10000 --batch-size 10 --model1 models/pythia-1.4b --model2 models/pythia-1b --corpus-path "pile.txt" --is-local --name-tag "450step" --input-len 450
 
-export CUDNN_HOME=/opt/cuDNN-7.0/
+python mlp-main.py --N 10000 --batch-size 10 --model1 models/pythia-1.4b --model2 models/pythia-1b --corpus-path "pile.txt" --is-local --name-tag "50step" --input-len 50
 
-export STUDENT_ID=$(whoami)
-
-export LD_LIBRARY_PATH=${CUDNN_HOME}/lib64:${CUDA_HOME}/lib64:$LD_LIBRARY_PATH
-
-export LIBRARY_PATH=${CUDNN_HOME}/lib64:$LIBRARY_PATH
-
-export CPATH=${CUDNN_HOME}/include:$CPATH
-
-export PATH=${CUDA_HOME}/bin:${PATH}
-
-export PYTHON_PATH=$PATH
-
-mkdir -p /disk/scratch/${STUDENT_ID}
+python mlp-main.py --N 10000 --batch-size 10 --model1 models/pythia-1.4b --model2 models/pythia-1b --corpus-path "pile.txt" --is-local --name-tag "900step" --input-len 900
 
 
-export TMPDIR=/disk/scratch/${STUDENT_ID}/
-export TMP=/disk/scratch/${STUDENT_ID}/
-
-mkdir -p ${TMP}/datasets/
-export DATASET_DIR=${TMP}/datasets/
-# Activate the relevant virtual environment:
-
-source /home/${STUDENT_ID}/miniconda3/bin/activate mambafour
-
-cd /home/s2558433/ArchitectureExtraction/local-env/
-
-pip install -r mamba_requirements.txt
-
+#50
+#900
