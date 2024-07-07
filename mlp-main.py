@@ -15,7 +15,7 @@ def main(args):
 
     ds = None
 
-    if args.local_text:
+    if args.is_local:
         ds = parse_local(path=args.corpus_path)
     elif args.is_splitted:
         ds= parse_splitted(path=args.corpus_path, subset=args.corpus_subset)
