@@ -19,10 +19,14 @@ export STUDENT_ID=$(whoami)
 # Load the module environment
 if [ -f /etc/profile.d/modules.sh ]; then
     . /etc/profile.d/modules.sh
+    echo "Module environment loaded."
 else
     echo "Error: /etc/profile.d/modules.sh not found."
     exit 1
 fi
+
+module avail cuda > cuda_modules.log
+
 
 # Unload any existing CUDA module and load the desired version
 module unload cuda
