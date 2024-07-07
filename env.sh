@@ -5,8 +5,6 @@
 #SBATCH --gres=gpu:1
 #SBATCH --mem=12000  # memory in Mb
 #SBATCH --time=0-08:00:00
-#SBATCH -e home/s2558433/job_errors_$JOB_ID.log  # error file for stderr
-#SBATCH -o home/s2558433/job_output_$JOB_ID.log  # output file for stdout
 
 # export CUDA_HOME=/opt/cuda-9.0.176.1/
 # export CUDNN_HOME=/opt/cuDNN-7.0/
@@ -20,25 +18,9 @@ export STUDENT_ID=$(whoami)
 echo "Loading module environment..."
 . /etc/profile.d/modules.sh
 
-# File to store the output
-output_file="job_output.out"
-
-# Print a message indicating listing of available modules
-echo "Listing all available modules..."
-# Append available module information to the output file
-module avail >> "$output_file"
-
-# Print a message indicating checking of currently loaded modules
-echo "Checking currently loaded modules..."
-# Append currently loaded module information to the output file
-module list >> "$output_file"
 
 module avail cuda
 
-
-# Unload any existing CUDA module and load the desired version
-module unload cuda
-module load cuda/12.1.1
 
 # Check if the CUDA module was loaded correctly
 echo "Checking if CUDA module is loaded..."
