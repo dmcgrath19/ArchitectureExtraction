@@ -16,9 +16,31 @@ export STUDENT_ID=$(whoami)
 # export PYTHON_PATH=$PATH
 
 
-. /etc/profile.d/modules.sh
+# Load the module environment
+if [ -f /etc/profile.d/modules.sh ]; then
+    . /etc/profile.d/modules.sh
+else
+    echo "Error: /etc/profile.d/modules.sh not found."
+    exit 1
+fi
+
+# Unload any existing CUDA module and load the desired version
 module unload cuda
 module load cuda/12.1.1
+
+# Check if the CUDA module was loaded correctly
+echo "Checking if CUDA module is loaded..."
+module list
+
+# Check if nvcc is available
+echo "Checking if nvcc is available in PATH..."
+which nvcc
+
+# If nvcc is not found, exit the script with an error
+if [ $? -ne 0 ]; then
+    echo "Error: nvcc not found. CUDA module may not be loaded correctly."
+    exit 1
+fi
 
 export HF_HOME="home/s2558433/.cache/huggingface_cache"
 export TRANSFORMERS_CACHE="home/s2558433/.cache/huggingface_cache/transformers"
