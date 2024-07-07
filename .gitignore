@@ -4,4 +4,4 @@ local-data/*
 *.log
 *.csv
 *.err
-
+ArchitectureExtraction*
