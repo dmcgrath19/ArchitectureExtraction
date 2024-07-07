@@ -18,6 +18,9 @@ export STUDENT_ID=$(whoami)
 echo "Loading module environment..."
 . /etc/profile.d/modules.sh
 
+MODULES=$(module avail)
+echo "Available Modules:"
+echo "$MODULES"
 
 module avail cuda
 
