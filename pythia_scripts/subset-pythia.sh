@@ -8,7 +8,7 @@
 #$ -q gpu
 #$ -pe gpu-a100 1
 #$ -l h_vmem=500G
-#$ -l h_rt=20:00:00
+#$ -l h_rt=24:00:00
 #$ -m bea -M s2558433@ed.ac.uk 
 
 export HF_HOME="/exports/eddie/scratch/s2558433/.cache/huggingface_cache"
@@ -23,13 +23,13 @@ cd /exports/eddie/scratch/s2558433/ArchitectureExtraction/
 
 conda activate pythia
 
-python main.py --N 10000 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model2 EleutherAI/pythia-2.8b --corpus-path "ArmelR/the-pile-splitted" --corpus-subset "ArXiv" --name-tag "10karxiv" --is-splitted
+# python main.py --N 10000 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model2 EleutherAI/pythia-2.8b --corpus-path "ArmelR/the-pile-splitted" --corpus-subset "ArXiv" --name-tag "10karxiv" --is-splitted
 
-python main.py --N 10000 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model2 EleutherAI/pythia-2.8b --corpus-path "ArmelR/the-pile-splitted" --corpus-subset "Enron Emails" --name-tag "10kenronemails" --is-splitted
+# python main.py --N 10000 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model2 EleutherAI/pythia-2.8b --corpus-path "ArmelR/the-pile-splitted" --corpus-subset "Enron Emails" --name-tag "10kenronemails" --is-splitted
 
-python main.py --N 10000 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model2 EleutherAI/pythia-2.8b --corpus-path "ArmelR/the-pile-splitted" --corpus-subset "Gutenberg (PG-19)" --name-tag "10kgutenberg"--is-splitted
+# python main.py --N 10000 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model2 EleutherAI/pythia-2.8b --corpus-path "ArmelR/the-pile-splitted" --corpus-subset "Gutenberg (PG-19)" --name-tag "10kgutenberg"--is-splitted
 
-python main.py --N 10000 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model2 EleutherAI/pythia-2.8b --corpus-path "ArmelR/the-pile-splitted" --corpus-subset "Github" --name-tag "10kgit" --is-splitted
+# python main.py --N 10000 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model2 EleutherAI/pythia-2.8b --corpus-path "ArmelR/the-pile-splitted" --corpus-subset "Github" --name-tag "10kgit" --is-splitted
 
 python main.py --N 10000 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model2 EleutherAI/pythia-2.8b --corpus-path "ArmelR/the-pile-splitted" --corpus-subset "Wikipedia (en)" --name-tag "10kwiki" --is-splitted
 
