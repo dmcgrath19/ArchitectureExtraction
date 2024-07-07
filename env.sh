@@ -30,5 +30,5 @@ export TOKENIZERS_PARALLELISM=false
 source /home/${STUDENT_ID}/miniconda3/bin/activate mambafour
 cd /home/s2558433/ArchitectureExtraction/local-env/
 
-pip install -r mamba-requirements.txt
+pip install -r mamba_requirements.txt
 
