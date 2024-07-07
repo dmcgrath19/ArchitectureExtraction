@@ -30,6 +30,7 @@ export CXXFLAGS="-std=c99"
 export CFLAGS="-std=c99"
 export TOKENIZERS_PARALLELISM=false
 
+which nvcc
 
 source /home/${STUDENT_ID}/miniconda3/bin/activate mambafour
 cd /home/s2558433/ArchitectureExtraction/local-env/
