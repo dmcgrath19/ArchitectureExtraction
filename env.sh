@@ -5,6 +5,8 @@
 #SBATCH --gres=gpu:1
 #SBATCH --mem=12000  # memory in Mb
 #SBATCH --time=0-08:00:00
+#SBATCH -e job_errors.log  # error file for stderr
+#SBATCH -o job_output.log  # output file for stdout
 
 # export CUDA_HOME=/opt/cuda-9.0.176.1/
 # export CUDNN_HOME=/opt/cuDNN-7.0/
@@ -14,6 +16,7 @@ export STUDENT_ID=$(whoami)
 # export CPATH=${CUDNN_HOME}/include:$CPATH
 # export PATH=${CUDA_HOME}/bin:${PATH}
 # export PYTHON_PATH=$PATH
+
 
 
 # Load the module environment
