@@ -25,7 +25,7 @@ else
     exit 1
 fi
 
-module avail cuda > cuda_modules.log
+module avail cuda
 
 
 # Unload any existing CUDA module and load the desired version
