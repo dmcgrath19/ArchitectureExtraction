@@ -33,19 +33,21 @@ cd /exports/eddie/scratch/s2558433/ArchitectureExtraction/
 
 conda activate mambafour
 
-python main.py --N 10000 --batch-size 10 --model1 models/mamba-2.8b-hf --model2 models/mamba-2.8b-hf --corpus-path "txt-files/pile.txt" --name-tag "input-50" --is-mamba --input-len 50 --is-local
+
+# python mlp-main.py --N 10000 --batch-size 10 --model1 models/pythia-1.4b --model2 models/pythia-790 --corpus-path "pile.txt" --is-local --name-tag "450step" --input-len 450
+
+python main.py --N 10000 --batch-size 10 --model1 models/mamba-790m-hf --model2 models/mamba-790m-hf --corpus-path "txt-files/pile.txt" --name-tag "input-50" --is-mamba --input-len 50 --is-local
+
+python main.py --N 10000 --batch-size 10 --model1 models/mamba-790m-hf --model2 models/mamba-790m-hf  --corpus-path "txt-files/pile.txt" --name-tag "input-450" --is-mamba --input-len 450 --is-local
+
+python main.py --N 10000 --batch-size 10 --model1 models/mamba-790m-hf --model2 models/mamba-790m-hf  --corpus-path "txt-files/pile.txt" --name-tag "input-900" --is-mamba --input-len 900 --is-local
+
+# python main.py --N 10000 --batch-size 10 --model1 models/mamba-2.8b-hf --model2 models/mamba-790m-hf --corpus-path "monology/pile-uncopyrighted" --name-tag "input-50" --is-mamba --input-len 50
 
 
-python main.py --N 10000 --batch-size 10 --model1 models/mamba-2.8b-hf --model2 models/mamba-2.8b-hf  --corpus-path "txt-files/pile.txt" --name-tag "input-450" --is-mamba --input-len 450 --is-local
+# python main.py --N 10000 --batch-size 10 --model1 models/mamba-2.8b-hf --model2 models/mamba-790m-hf  --corpus-path "monology/pile-uncopyrighted" --name-tag "input-450" --is-mamba --input-len 450
 
-python main.py --N 10000 --batch-size 10 --model1 models/mamba-2.8b-hf --model2 models/mamba-2.8b-hf  --"txt-files/pile.txt" --name-tag "input-900" --is-mamba --input-len 900 --is-local
-
-# python main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-790m-hf --corpus-path "monology/pile-uncopyrighted" --name-tag "input-50" --is-mamba --input-len 50
-
-
-# python main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-790m-hf  --corpus-path "monology/pile-uncopyrighted" --name-tag "input-450" --is-mamba --input-len 450
-
-# python main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-790m-hf  --corpus-path "monology/pile-uncopyrighted" --name-tag "input-900" --is-mamba --input-len 900
+# python main.py --N 10000 --batch-size 10 --model1 models/mamba-2.8b-hf --model2 models/mamba-790m-hf  --corpus-path "monology/pile-uncopyrighted" --name-tag "input-900" --is-mamba --input-len 900
 
 
 conda deactivate 
