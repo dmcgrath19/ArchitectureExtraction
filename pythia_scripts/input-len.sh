@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # Use the variable for the job name and log/error files
-#$ -N inputLlen-mamba
-#$ -o /exports/eddie/scratch/s2558433/job_runs/up-mam-$JOB_ID.log
-#$ -e /exports/eddie/scratch/s2558433/job_runs/up-mam-$JOB_ID.err
+#$ -N inputLlen-Pythia
+#$ -o /exports/eddie/scratch/s2558433/job_runs/py-input-$JOB_ID.log
+#$ -e /exports/eddie/scratch/s2558433/job_runs/py-input-$JOB_ID.err
 #$ -cwd
 #$ -q gpu
 #$ -pe gpu-a100 1
@@ -39,8 +39,9 @@ python main.py --N 10000 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model
 
 python main.py --N 10000 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model2 EleutherAI/pythia-1b --corpus-path "monology/pile-uncopyrighted" --name-tag "input-450"  --input-len 450
 
-python main.py --N 10000 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model2 EleutherAI/pythia-160m --corpus-path "monology/pile-uncopyrighted" --name-tag "input-450"  --input-len 450
+python main.py --N 10000 --batch-size 10 --model1 EleutherAI/pythia-1.4b --model2 EleutherAI/pythia-160m --corpus-path "monology/pile-uncopyrighted" --name-tag "input-450"  --input-len 450
 
+python main.py --N 10000 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model2 EleutherAI/pythia-2.8b --corpus-path "monology/pile-uncopyrighted" --name-tag "input-450"  --input-len 450
 
 
 
