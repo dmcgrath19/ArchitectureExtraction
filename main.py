@@ -15,8 +15,8 @@ def main(args):
 
     ds = None
 
-    if args.local_text:
-        ds = parse_local(path=args.local_text)
+    if args.is_local:
+        ds = parse_local(path=args.corpus_path)
     elif args.is_splitted:
         ds= parse_splitted(path=args.corpus_path, subset=args.corpus_subset)
     elif args.is_wmt:
@@ -59,7 +59,7 @@ def main(args):
     with tqdm(total=args.N) as pbar:
         for _ in range(num_batches):
             #input_len 25 works pile
-            input_len = 150
+            input_len = args.input_len
             input_ids = []
             attention_mask = []
             
@@ -201,8 +201,8 @@ def parse_arguments(argv):
     parser.add_argument('--split', type=str, required=False, help="Split for dataset")
     parser.add_argument('--is-splitted', action='store_true', help="Determine type of dataset parsing")
     parser.add_argument('--is-wmt',  action='store_true', help="Determine type of dataset parsing")
-    parser.add_argument('--local-text', type=str, required=False, help="local text file")
-
+    parser.add_argument('--is-local',action='store_true', help="local text file")
+    parser.add_argument('--input-len', type=int, default=150, help="Default length for input prompt")
 
 
     return parser.parse_args(argv)
