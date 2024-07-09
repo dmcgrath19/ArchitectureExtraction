@@ -36,15 +36,17 @@ conda activate mambafour
 
 # python mlp-main.py --N 10000 --batch-size 10 --model1 state-spaces/pythia-1.4b --model2 state-spaces/pythia-790 --corpus-path "pile.txt"   --name-tag "450step" --input-len 450
 
-python main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-2.8bm-hf --model2 state-spaces/mamba-2.8b-hf --corpus-path "monology/pile-uncopyrighted" --name-tag "input-450" --is-mamba --input-len 450  
+python main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-2.8b-hf --corpus-path "monology/pile-uncopyrighted" --name-tag "input-450" --is-mamba --input-len 450  
+
+python main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-2.8b-hf --corpus-path "monology/pile-uncopyrighted" --name-tag "input-50" --is-mamba --input-len 50  
 
 # python main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-790m-hf --model2 state-spaces/mamba-790m-hf  --corpus-path "monology/pile-uncopyrighted" --name-tag "input-450" --is-mamba --input-len 450  
 
 # python main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-790m-hf --model2 state-spaces/mamba-790m-hf  --corpus-path "monology/pile-uncopyrighted" --name-tag "input-900" --is-mamba --input-len 900  
 
-python main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-790m-hf --model2 state-spaces/mamba-790m-hf --corpus-path "monology/pile-uncopyrighted" --name-tag "input-450" --is-mamba --input-len 450
+# python main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-790m-hf --model2 state-spaces/mamba-790m-hf --corpus-path "monology/pile-uncopyrighted" --name-tag "input-450" --is-mamba --input-len 450
 
-python main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-370m-hf --model2 state-spaces/mamba-130m-hf --corpus-path "monology/pile-uncopyrighted" --name-tag "input-450" --is-mamba --input-len 450
+# python main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-370m-hf --model2 state-spaces/mamba-130m-hf --corpus-path "monology/pile-uncopyrighted" --name-tag "input-450" --is-mamba --input-len 450
 
 
 # python main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-790m-hf  --corpus-path "monology/pile-uncopyrighted" --name-tag "input-450" --is-mamba --input-len 450
