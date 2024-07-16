@@ -37,9 +37,12 @@ conda activate mambafour
 
 # python main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-mamba-130m-hf --corpus-path "ArmelR/the-pile-splitted" --corpus-subset "ArXiv" --is-mamba --name-tag "10karxiv-input-450" --is-splitted --input-len 450
 
-python main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-mamba-130m-hf --corpus-path "ArmelR/the-pile-splitted" --corpus-subset "Enron Emails" --name-tag "10kenron-input-150" --is-mamba --is-splitted
+python main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-130m-hf --corpus-path "ArmelR/the-pile-splitted" --corpus-subset "Enron Emails" --name-tag "10kenron-input-450" --is-mamba --is-splitted --input-len 450
 
-python main.py --N 10000 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model2 EleutherAI/pythia-160m --corpus-path "ArmelR/the-pile-splitted" --corpus-subset "Enron Emails" --name-tag "10kenron-input-150"
+python main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-130m-hf --corpus-path "ArmelR/the-pile-splitted" --corpus-subset "Enron Emails" --name-tag "10kenron-input-150" --is-mamba --is-splitted --input-len 450
+
+
+# python main.py --N 10000 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model2 EleutherAI/pythia-160m --corpus-path "ArmelR/the-pile-splitted" --corpus-subset "Enron Emails" --name-tag "10kenron-input-150"
 
 
 # python main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-2.8b-hf --corpus-path "ArmelR/the-pile-splitted" --corpus-subset "Gutenberg (PG-19)" --name-tag "10kgutenberg-input-450" --is-mamba --is-splitted --input-len 450
