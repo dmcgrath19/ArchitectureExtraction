@@ -35,13 +35,16 @@ conda activate pythia
 
 
 
-python main.py --N 10000 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model2 EleutherAI/pythia-2.8b --corpus-path "monology/pile-uncopyrighted" --name-tag "input-50"  --input-len 50  
+python main.py --N 10000 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model2 EleutherAI/pythia-410m --corpus-path "monology/pile-uncopyrighted" --name-tag "10kpile"  
 
-python main.py --N 10000 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model2 EleutherAI/pythia-1b --corpus-path "monology/pile-uncopyrighted" --name-tag "input-450"  --input-len 450
+python main.py --N 10000 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model2 EleutherAI/pythia-1b --corpus-path "monology/pile-uncopyrighted" --name-tag "10kpile" 
 
-python main.py --N 10000 --batch-size 10 --model1 EleutherAI/pythia-1.4b --model2 EleutherAI/pythia-160m --corpus-path "monology/pile-uncopyrighted" --name-tag "input-450"  --input-len 450
+python main.py --N 10000 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model2 EleutherAI/pythia-160m --corpus-path "monology/pile-uncopyrighted" --name-tag "10kpile" 
 
-python main.py --N 10000 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model2 EleutherAI/pythia-2.8b --corpus-path "monology/pile-uncopyrighted" --name-tag "input-450"  --input-len 450
+python main.py --N 10000 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model2 EleutherAI/pythia-2.8b --corpus-path "monology/pile-uncopyrighted" --name-tag "10kpile" 
+
+python main.py --N 10000 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model2 EleutherAI/pythia-1.4b --corpus-path "monology/pile-uncopyrighted" --name-tag "10kpile" 
+
 
 
 
