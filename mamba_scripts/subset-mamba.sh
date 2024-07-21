@@ -46,7 +46,7 @@ python main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --m
 
 python main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-130m-hf --corpus-path "ArmelR/the-pile-splitted" --corpus-subset "UPSTO Backgrounds" --name-tag "10kupsto-input-450" --is-mamba --is-splitted --input-len 450
 
-python main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-130m-hf --corpus-path "ArmelR/the-pile-splitted" --corpus-subset "PubMed Abstracts" --name-tag "10kpubabs-input-450" --is-mamba --is-splitted --input-len 450
+python main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-130m-hf --corpus-path "ArmelR/the-pile-splitted" --corpus-subset "PubMed Abstracts" --name-tag "10kpubabs-input-150" --is-mamba --is-splitted --input-len 150
 
 
 
