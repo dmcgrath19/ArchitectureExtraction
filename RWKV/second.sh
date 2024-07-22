@@ -34,7 +34,7 @@ cd /exports/eddie/scratch/s2558433/ArchitectureExtraction/
 conda activate rwkv
 
 
-python main.py --N 10000 --batch-size 10 --model1 RWKV/rwkv-4-3b-pile --model2 RWKV/rwkv-4-430m-pile --corpus-path "monology/pile-uncopyrighted" --name-tag "10kpile" 
+# python main.py --N 10000 --batch-size 10 --model1 RWKV/rwkv-4-3b-pile --model2 RWKV/rwkv-4-430m-pile --corpus-path "monology/pile-uncopyrighted" --name-tag "10kpile" 
 
 python main.py --N 10000 --batch-size 10 --model1 RWKV/rwkv-4-3b-pile --model2 RWKV/rwkv-4-169m-pile --corpus-path "monology/pile-uncopyrighted" --name-tag "10kpile"
 
