@@ -5,7 +5,7 @@ import torch
 import zlib
 import csv
 from datasets import load_dataset
-from transformers import MambaForCausalLM, AutoTokenizer, GPTNeoXForCausalLM, RwkvForCausalLM
+from transformers import MambaForCausalLM, AutoTokenizer, GPTNeoXForCausalLM, RwkvForCausalLM, AutoModelForCausalLM
 from tqdm import tqdm
 from model_utils import calculate_perplexity, print_best, parse_pilecorpus, parse_splitted, parse_wmt_splitted, parse_local, device
 
@@ -44,8 +44,8 @@ def main(args):
         model1 = RwkvForCausalLM.from_pretrained(args.model1, return_dict=True).to(device)
         model2 = RwkvForCausalLM.from_pretrained(args.model2, return_dict=True).to(device)
     else:
-        model1 = GPTNeoXForCausalLM.from_pretrained(args.model1, return_dict=True).to(device)
-        model2 = GPTNeoXForCausalLM.from_pretrained(args.model2, return_dict=True).to(device)
+        model1 = AutoModelForCausalLM.from_pretrained(args.model1, return_dict=True).to(device)
+        model2 = AutoModelForCausalLM.from_pretrained(args.model2, return_dict=True).to(device)
 
     model1.config.pad_token_id = model1.config.eos_token_id
     model2.eval()
