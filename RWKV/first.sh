@@ -31,7 +31,7 @@ module load anaconda
 
 cd /exports/eddie/scratch/s2558433/ArchitectureExtraction/
 
-conda activate pythia
+conda activate rwkv
 
 
 python main.py --N 10000 --batch-size 10 --model1 BlinkDL/rwkv-4-pile-3b --model2 BlinkDL/rwkv-4-pile-3b --corpus-path "monology/pile-uncopyrighted" --name-tag "10kpile"  
