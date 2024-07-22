@@ -34,9 +34,9 @@ cd /exports/eddie/scratch/s2558433/ArchitectureExtraction/
 conda activate rwkv
 
 
-python main.py --N 10000 --batch-size 10 --model1 BlinkDL/rwkv-4-pile-3b --model2 BlinkDL/rwkv-4-pile-3b --corpus-path "monology/pile-uncopyrighted" --name-tag "10kpile"  
+python main.py --N 10000 --batch-size 10 --model1 RWKV/rwkv-4-3b-pile --model2 RWKV/rwkv-4-3b-pile --corpus-path "monology/pile-uncopyrighted" --name-tag "10kpile"  
 
-python main.py --N 10000 --batch-size 10 --model1 BlinkDL/rwkv-4-pile-3b --model2 BlinkDL/rwkv-4-pile-1b5 --corpus-path "monology/pile-uncopyrighted" --name-tag "10kpile" 
+python main.py --N 10000 --batch-size 10 --model1 RWKV/rwkv-4-3b-pile --model2 RWKV/rwkv-4-1b5-pile --corpus-path "monology/pile-uncopyrighted" --name-tag "10kpile" 
 
 
 conda deactivate 
