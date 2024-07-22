@@ -23,9 +23,9 @@ cd /exports/eddie/scratch/s2558433/ArchitectureExtraction/
 
 conda activate pythia
 
-python main.py --N 10000 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model2 EleutherAI/pythia-160m --corpus-path "ArmelR/the-pile-splitted" --corpus-subset "FreeLaw" --name-tag "10kfree-input-450" --is-splitted --input-len 450
+# python main.py --N 10000 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model2 EleutherAI/pythia-160m --corpus-path "ArmelR/the-pile-splitted" --corpus-subset "FreeLaw" --name-tag "10kfree-input-450" --is-splitted --input-len 450
 
-python main.py --N 10000 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model2 EleutherAI/pythia-160m --corpus-path "ArmelR/the-pile-splitted" --corpus-subset "EuroParl" --name-tag "10keuro-input-450" --is-splitted --input-len 450
+# python main.py --N 10000 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model2 EleutherAI/pythia-160m --corpus-path "ArmelR/the-pile-splitted" --corpus-subset "EuroParl" --name-tag "10keuro-input-450" --is-splitted --input-len 450
 
 
 python main.py --N 10000 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model2 EleutherAI/pythia-160m --corpus-path "ArmelR/the-pile-splitted" --corpus-subset "Pile-CC" --name-tag "10kpilecc-input-450" --is-splitted --input-len 450
