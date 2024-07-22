@@ -40,7 +40,7 @@ def main(args):
     if args.is_mamba:
         model1 = MambaForCausalLM.from_pretrained(args.model1, return_dict=True).to(device)
         model2 = MambaForCausalLM.from_pretrained(args.model2, return_dict=True).to(device)
-    elif args.is_rkvw:
+    elif args.is_rwkv:
         model1 = RwkvForCausalLM.from_pretrained(args.model1, return_dict=True).to(device)
         model2 = RwkvForCausalLM.from_pretrained(args.model2, return_dict=True).to(device)
     else:
@@ -206,7 +206,7 @@ def parse_arguments(argv):
     parser.add_argument('--is-wmt',  action='store_true', help="Determine type of dataset parsing")
     parser.add_argument('--is-local',action='store_true', help="local text file")
     parser.add_argument('--input-len', type=int, default=150, help="Default length for input prompt")
-    parser.add_argument('--is-rkvw', action='store_true', help="Special load for model")
+    parser.add_argument('--is-rwkv', action='store_true', help="Special load for model")
 
 
     return parser.parse_args(argv)
