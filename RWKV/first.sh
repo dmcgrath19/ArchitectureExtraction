@@ -2,8 +2,8 @@
 
 # Use the variable for the job name and log/error files
 #$ -N rkvw-L
-#$ -o /exports/eddie/scratch/s2558433/job_runs/py-input-$JOB_ID.log
-#$ -e /exports/eddie/scratch/s2558433/job_runs/py-input-$JOB_ID.err
+#$ -o /exports/eddie/scratch/s2558433/job_runs/rwkv-$JOB_ID.log
+#$ -e /exports/eddie/scratch/s2558433/job_runs/rwkv-$JOB_ID.err
 #$ -cwd
 #$ -q gpu
 #$ -pe gpu-a100 1
