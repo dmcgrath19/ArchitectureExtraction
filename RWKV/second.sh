@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Use the variable for the job name and log/error files
-#$ -N inputLlen-rkvw
+#$ -N rkvw-s
 #$ -o /exports/eddie/scratch/s2558433/job_runs/py-input-$JOB_ID.log
 #$ -e /exports/eddie/scratch/s2558433/job_runs/py-input-$JOB_ID.err
 #$ -cwd
