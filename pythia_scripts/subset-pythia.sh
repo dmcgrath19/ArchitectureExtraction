@@ -39,6 +39,4 @@ python main.py --N 10000 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model
 
 python main.py --N 10000 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model2 EleutherAI/pythia-2.8b --corpus-path "ArmelR/the-pile-splitted" --corpus-subset "PubMed Abstracts" --name-tag "10kpubabs-input-450" --is-splitted  --input-len 450
 
-
-
 conda deactivate 
