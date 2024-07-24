@@ -1,16 +1,15 @@
 #!/bin/bash
 
 # Use the variable for the job name and log/error files
-#$ -N gptneox-a
-#$ -o /exports/eddie/scratch/s2558433/job_runs/py-input-$JOB_ID.log
-#$ -e /exports/eddie/scratch/s2558433/job_runs/py-input-$JOB_ID.err
+#$ -N upper-mamba
+#$ -o /exports/eddie/scratch/s2558433/job_runs/up-mam-$JOB_ID.log
+#$ -e /exports/eddie/scratch/s2558433/job_runs/up-mam-$JOB_ID.err
 #$ -cwd
 #$ -q gpu
 #$ -pe gpu-a100 1
 #$ -l h_vmem=300G
 #$ -l h_rt=24:00:00
 #$ -m bea -M s2558433@ed.ac.uk 
-
 export HF_HOME="/exports/eddie/scratch/s2558433/.cache/huggingface_cache"
 export TRANSFORMERS_CACHE="/exports/eddie/scratch/s2558433/.cache/huggingface_cache/transformers"
 export HF_DATASETS_CACHE="/exports/eddie/scratch/s2558433/.cache/huggingface_cache/datasets"
@@ -25,17 +24,18 @@ export TOKENIZERS_PARALLELISM=false
 module unload cuda
 module load cuda/12.1.1
 
+#qlogin -q gpu -pe gpu-a100 1 -l h_vmem=500G -l h_rt=24:00:00
 
 source /exports/eddie/scratch/s2558433/miniconda3/etc/profile.d/conda.sh
 module load anaconda
 
 cd /exports/eddie/scratch/s2558433/ArchitectureExtraction/
 
-conda activate pythia
+conda activate mambafour
 
-python main.py --N 10000 --batch-size 10 --model1 cerebras/btlm-3b-8k-base --model2 cerebras/btlm-3b-8k-base --corpus-path "cerebras/SlimPajama-627B" --name-tag "10kpile1"  
+python main.py --N 10000 --batch-size 10 --model1 ArthurZ/mamba-2.8b-slimpj --model2 ArthurZ/mamba-2.8b-slimpj --corpus-path "cerebras/SlimPajama-627B" --name-tag "10kpile1"  
 
-python main.py --N 10000 --batch-size 10 --model1 cerebras/btlm-3b-8k-base --model2 cerebras/btlm-3b-8k-base --corpus-path "cerebras/SlimPajama-627B" --name-tag "10kpile2"  
+python main.py --N 10000 --batch-size 10 --model1 ArthurZ/mamba-2.8b-slimpj --model2 ArthurZ/mamba-2.8b-slimpj --corpus-path "cerebras/SlimPajama-627B" --name-tag "10kpile2"  
 
 
 conda deactivate 
