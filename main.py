@@ -44,14 +44,12 @@ def main(args):
         model1 = AutoModelForCausalLM.from_pretrained(
             args.model1, 
             trust_remote_code=True, 
-            torch_dtype="auto", 
             return_dict=True
         ).to(device)
 
         model2 = AutoModelForCausalLM.from_pretrained(
             args.model2, 
             trust_remote_code=True, 
-            torch_dtype="auto", 
             return_dict=True
         ).to(device)
 
