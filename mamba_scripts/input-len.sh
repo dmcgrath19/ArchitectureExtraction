@@ -36,15 +36,15 @@ conda activate mambafour
 
 # python mlp-main.py --N 10000 --batch-size 10 --model1 state-spaces/pythia-1.4b --model2 state-spaces/pythia-790 --corpus-path "pile.txt"   --name-tag "450step" --input-len 450
 
-python main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-2.8b-hf --corpus-path "monology/pile-uncopyrighted" --name-tag "10kpile" --is-mamba 
+# python main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-2.8b-hf --corpus-path "monology/pile-uncopyrighted" --name-tag "10kpile" --is-mamba 
 
-python main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-1.4b-hf --corpus-path "monology/pile-uncopyrighted" --name-tag "10kpile" --is-mamba
+# python main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-1.4b-hf --corpus-path "monology/pile-uncopyrighted" --name-tag "10kpile" --is-mamba
 
-python main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-790m-hf --corpus-path "monology/pile-uncopyrighted" --name-tag "10kpile" --is-mamba
+# python main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-790m-hf --corpus-path "monology/pile-uncopyrighted" --name-tag "10kpile" --is-mamba
 
-python main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-370m-hf --corpus-path "monology/pile-uncopyrighted" --name-tag "10kpile" --is-mamba
+# python main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-370m-hf --corpus-path "monology/pile-uncopyrighted" --name-tag "10kpile" --is-mamba
 
-python main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-130m-hf --corpus-path "monology/pile-uncopyrighted" --name-tag "10kpile" --is-mamba
+# python main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-130m-hf --corpus-path "monology/pile-uncopyrighted" --name-tag "10kpile" --is-mamba
 
 
 
@@ -54,7 +54,7 @@ python main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --m
 
 # python main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-790m-hf --model2 state-spaces/mamba-790m-hf --corpus-path "monology/pile-uncopyrighted" --name-tag "input-450" --is-mamba --input-len 450
 
-# python main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-370m-hf --model2 state-spaces/mamba-130m-hf --corpus-path "monology/pile-uncopyrighted" --name-tag "input-450" --is-mamba --input-len 450
+python main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-370m-hf --model2 state-spaces/mamba-130m-hf --corpus-path "monology/pile-uncopyrighted" --name-tag "input-450" --is-mamba --input-len 450
 
 
 # python main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-790m-hf  --corpus-path "monology/pile-uncopyrighted" --name-tag "input-450" --is-mamba --input-len 450
