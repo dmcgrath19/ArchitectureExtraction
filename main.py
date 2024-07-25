@@ -40,6 +40,21 @@ def main(args):
     if args.is_mamba:
         model1 = MambaForCausalLM.from_pretrained(args.model1, return_dict=True).to(device)
         model2 = MambaForCausalLM.from_pretrained(args.model2, return_dict=True).to(device)
+    elif args.is_bltm:
+        model1 = AutoModelForCausalLM.from_pretrained(
+            args.model1, 
+            trust_remote_code=True, 
+            torch_dtype="auto", 
+            return_dict=True
+        ).to(device)
+
+        model2 = AutoModelForCausalLM.from_pretrained(
+            args.model2, 
+            trust_remote_code=True, 
+            torch_dtype="auto", 
+            return_dict=True
+        ).to(device)
+
     else:
         model1 = AutoModelForCausalLM.from_pretrained(args.model1, return_dict=True).to(device)
         model2 = AutoModelForCausalLM.from_pretrained(args.model2, return_dict=True).to(device)
@@ -204,6 +219,7 @@ def parse_arguments(argv):
     parser.add_argument('--is-local',action='store_true', help="local text file")
     parser.add_argument('--input-len', type=int, default=150, help="Default length for input prompt")
     parser.add_argument('--is-rwkv', action='store_true', help="Special load for model")
+    parser.add_argument('--is-bltm', action='store_true', help="Special load for model")
 
 
     return parser.parse_args(argv)

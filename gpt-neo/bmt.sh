@@ -33,9 +33,9 @@ cd /exports/eddie/scratch/s2558433/ArchitectureExtraction/
 
 conda activate pythia
 
-python main.py --N 10000 --batch-size 10 --model1 cerebras/btlm-3b-8k-base --model2 cerebras/btlm-3b-8k-base --corpus-path "cerebras/SlimPajama-627B" --name-tag "10kpile1"  
+python main.py --N 10000 --batch-size 10 --model1 cerebras/btlm-3b-8k-base --model2 cerebras/btlm-3b-8k-base --corpus-path "cerebras/SlimPajama-627B" --name-tag "10kpile1" --is-bltm
 
-python main.py --N 10000 --batch-size 10 --model1 cerebras/btlm-3b-8k-base --model2 cerebras/btlm-3b-8k-base --corpus-path "cerebras/SlimPajama-627B" --name-tag "10kpile2"  
+python main.py --N 10000 --batch-size 10 --model1 cerebras/btlm-3b-8k-base --model2 cerebras/btlm-3b-8k-base --corpus-path "cerebras/SlimPajama-627B" --name-tag "10kpile2" --is-bltm
 
 
 conda deactivate 
