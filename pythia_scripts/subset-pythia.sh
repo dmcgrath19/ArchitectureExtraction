@@ -35,11 +35,13 @@ python main.py --N 10000 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model
 
 # python main.py --N 10000 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model2 EleutherAI/pythia-2.8b --corpus-path "ArmelR/the-pile-splitted" --corpus-subset "Wikipedia (en)" --name-tag "10kwiki-input-450" --is-splitted --input-len 450
 
-python main.py --N 10000 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model2 EleutherAI/pythia-2.8b --corpus-path "ArmelR/the-pile-splitted" --corpus-subset "HackerNews" --name-tag "10khacker-input-450" --is-splitted  --input-len 450
+# python main.py --N 10000 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model2 EleutherAI/pythia-2.8b --corpus-path "ArmelR/the-pile-splitted" --corpus-subset "HackerNews" --name-tag "10khacker-input-450" --is-splitted  --input-len 450
 
-python main.py --N 10000 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model2 EleutherAI/pythia-2.8b --corpus-path "ArmelR/the-pile-splitted" --corpus-subset "PubMed Central" --name-tag "10kpubc-input-450" --is-splitted  --input-len 450
+# python main.py --N 10000 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model2 EleutherAI/pythia-2.8b --corpus-path "ArmelR/the-pile-splitted" --corpus-subset "PubMed Central" --name-tag "10kpubc-input-450" --is-splitted  --input-len 450
 
 
+
+#********************************
 # python main.py --N 10000 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model2 EleutherAI/pythia-160m --corpus-path "ArmelR/the-pile-splitted" --corpus-subset "ArXiv"  --name-tag "10karxiv-input-150" --is-splitted #--input-len 450
 
 # python main.py --N 10000 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model2 EleutherAI/pythia-160m --corpus-path "ArmelR/the-pile-splitted" --corpus-subset "FreeLaw" --name-tag "10kfree-input-150"  --is-splitted #--input-len 450
