@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # Use the variable for the job name and log/error files
-#$ -N gptneox-a
-#$ -o /exports/eddie/scratch/s2558433/job_runs/py-input-$JOB_ID.log
-#$ -e /exports/eddie/scratch/s2558433/job_runs/py-input-$JOB_ID.err
+#$ -N BMLT-a
+#$ -o /exports/eddie/scratch/s2558433/job_runs/BMLT-$JOB_ID.log
+#$ -e /exports/eddie/scratch/s2558433/job_runs/BMLT-$JOB_ID.err
 #$ -cwd
 #$ -q gpu
 #$ -pe gpu-a100 1
