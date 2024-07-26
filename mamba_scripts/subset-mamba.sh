@@ -33,6 +33,7 @@ module load anaconda
 cd /exports/eddie/scratch/s2558433/ArchitectureExtraction/
 conda activate mambafour
 
+
 # python main.py --N 100 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-370m-hf --corpus-path 'KaiNylund/WMT-year-splits' --split "2021_train" --name-tag 10k-base --is-mamba --is-wmt
 
 python main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-130m-hf --corpus-path "ArmelR/the-pile-splitted" --corpus-subset "ArXiv" --is-mamba --name-tag "10karxiv-input-150" --is-splitted #--input-len 450
