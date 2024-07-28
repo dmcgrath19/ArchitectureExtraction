@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Use the variable for the job name and log/error files
-#$ -N rkvw-XL
+#$ -N rkvw-L
 #$ -o /exports/eddie/scratch/s2558433/job_runs/rwkv-$JOB_ID.log
 #$ -e /exports/eddie/scratch/s2558433/job_runs/rwkv-$JOB_ID.err
 #$ -cwd
@@ -32,12 +32,12 @@ module load anaconda
 cd /exports/eddie/scratch/s2558433/ArchitectureExtraction/
 
 conda activate rwkv
+ 
+python main.py --N 2000 --batch-size 10 --model1 RWKV/rwkv-4-3b-pile --model2 RWKV/rwkv-4-1b5-pile --corpus-path "monology/pile-uncopyrighted" --name-tag "2kpile" 
+python main.py --N 2000 --batch-size 10 --model1 RWKV/rwkv-4-3b-pile --model2 RWKV/rwkv-4-1b5-pile --corpus-path "monology/pile-uncopyrighted" --name-tag "2kpile" 
+python main.py --N 2000 --batch-size 10 --model1 RWKV/rwkv-4-3b-pile --model2 RWKV/rwkv-4-1b5-pile --corpus-path "monology/pile-uncopyrighted" --name-tag "2kpile" 
+python main.py --N 2000 --batch-size 10 --model1 RWKV/rwkv-4-3b-pile --model2 RWKV/rwkv-4-1b5-pile --corpus-path "monology/pile-uncopyrighted" --name-tag "2kpile" 
 
-
-python main.py --N 2000 --batch-size 10 --model1 RWKV/rwkv-4-3b-pile --model2 RWKV/rwkv-4-3b-pile --corpus-path "monology/pile-uncopyrighted" --name-tag "2kpile"  
-python main.py --N 2000 --batch-size 10 --model1 RWKV/rwkv-4-3b-pile --model2 RWKV/rwkv-4-3b-pile --corpus-path "monology/pile-uncopyrighted" --name-tag "2kpile"  
-python main.py --N 2000 --batch-size 10 --model1 RWKV/rwkv-4-3b-pile --model2 RWKV/rwkv-4-3b-pile --corpus-path "monology/pile-uncopyrighted" --name-tag "2kpile"  
-python main.py --N 2000 --batch-size 10 --model1 RWKV/rwkv-4-3b-pile --model2 RWKV/rwkv-4-3b-pile --corpus-path "monology/pile-uncopyrighted" --name-tag "2kpile"  
 
 
 conda deactivate 
