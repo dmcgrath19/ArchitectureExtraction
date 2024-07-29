@@ -94,29 +94,24 @@ More examples can be found at http://www.hypexr.org/linux_scp_help.php. If a com
 
 *****
 
-For the Mamba enviornment:
+For the Mamba enviornment(that worked):
 
-conda create -n mambathree python=3.9
+conda create -n mambafour python=3.10
 
-conda activate mambathree
+conda activate mambafour
 
-conda install -c conda-forge pycairo pygobject manimpango -y
-conda install pytorch torchvision torchaudio pytorch-cuda=12.1 -c pytorch-nightly -c nvidia -y
+ conda install -c conda-forge gcc_linux-64 gxx_linux-64
 
-
-
-pip install transformers==4.40.1
-
+pip3 install torch torchvision torchaudio
+pip install transformers==4.41.0
 pip install --upgrade pip
-pip install torch
-pip install -r requirements
+
+pip install numpy tqdm zstandard
+pip install datasets
 pip install --upgrade datasets
-pip install causal-conv1d>=1.2.0
-pip install mamba-ssm
+
+pip install causal-conv1d==1.4.0
+pip install mamba-ssm==2.2.2
 
 
 (The new transformers version 4.42.3 seems to cause errors when setting attention mask & trying with a higher python version caused dependency conflicts? This method worked ^)
-
-
-
-pip3 install torch torchvision torchaudio
