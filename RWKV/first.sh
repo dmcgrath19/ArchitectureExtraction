@@ -34,10 +34,10 @@ cd /exports/eddie/scratch/s2558433/ArchitectureExtraction/
 conda activate rwkv
 
 
-python main.py --N 2000 --batch-size 10 --model1 RWKV/rwkv-4-3b-pile --model2 RWKV/rwkv-4-3b-pile --corpus-path "monology/pile-uncopyrighted" --name-tag "2kpile"  
-python main.py --N 2000 --batch-size 10 --model1 RWKV/rwkv-4-3b-pile --model2 RWKV/rwkv-4-3b-pile --corpus-path "monology/pile-uncopyrighted" --name-tag "2kpile"  
-python main.py --N 2000 --batch-size 10 --model1 RWKV/rwkv-4-3b-pile --model2 RWKV/rwkv-4-3b-pile --corpus-path "monology/pile-uncopyrighted" --name-tag "2kpile"  
-python main.py --N 2000 --batch-size 10 --model1 RWKV/rwkv-4-3b-pile --model2 RWKV/rwkv-4-3b-pile --corpus-path "monology/pile-uncopyrighted" --name-tag "2kpile"  
+python main.py --N 2000 --batch-size 10 --model1 RWKV/rwkv-4-3b-pile --model2 RWKV/rwkv-4-3b-pile --corpus-path "monology/pile-uncopyrighted" --name-tag "2kpile-a"  
+python main.py --N 2000 --batch-size 10 --model1 RWKV/rwkv-4-3b-pile --model2 RWKV/rwkv-4-3b-pile --corpus-path "monology/pile-uncopyrighted" --name-tag "2kpile-b"  
+python main.py --N 2000 --batch-size 10 --model1 RWKV/rwkv-4-3b-pile --model2 RWKV/rwkv-4-3b-pile --corpus-path "monology/pile-uncopyrighted" --name-tag "2kpile-c"  
+python main.py --N 2000 --batch-size 10 --model1 RWKV/rwkv-4-3b-pile --model2 RWKV/rwkv-4-3b-pile --corpus-path "monology/pile-uncopyrighted" --name-tag "2kpile-d"  
 
 
 conda deactivate 
