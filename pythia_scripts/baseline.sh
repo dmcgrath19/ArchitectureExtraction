@@ -2,7 +2,7 @@
 #!/bin/bash
 
 # Use the variable for the job name and log/error files
-#$ -N re-4.1.1.16.16
+#$ -N base-pythia
 #$ -o /exports/eddie/scratch/s2558433/job_runs/base$JOB_ID.log
 #$ -e /exports/eddie/scratch/s2558433/job_runs/base$JOB_ID.err
 #$ -cwd
@@ -34,15 +34,23 @@ cd /exports/eddie/scratch/s2558433/ArchitectureExtraction/
 
 conda activate pythia
 
-# python main.py --N 100 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model2 EleutherAI/pythia-410m --corpus-path 'KaiNylund/WMT-year-splits' --split "2021_train" --name-tag 10k-base --is-wmt
+# python main.py --N 100 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model2 EleutherAI/pythia-410m --corpus-path 'KaiNylund/WMT-year-splits' --split "2021_train" --name-tag 10k-baseline --is-wmt
+
+python main.py --N 100 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model2 EleutherAI/pythia-1.4b --corpus-path 'KaiNylund/WMT-year-splits' --split "2021_train" --name-tag 10k-baseline --is-wmt
+
+python main.py --N 100 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model2 EleutherAI/pythia-1b --corpus-path 'KaiNylund/WMT-year-splits' --split "2021_train" --name-tag 10k-baseline --is-wmt
+
+python main.py --N 100 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model2 EleutherAI/pythia-2.4b --corpus-path 'KaiNylund/WMT-year-splits' --split "2021_train" --name-tag 10k-baseline --is-wmt
+
+python main.py --N 100 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model2 EleutherAI/pythia-160m --corpus-path 'KaiNylund/WMT-year-splits' --split "2021_train" --name-tag 10k-baseline --is-wmt
 
 # python main.py --N 10000 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model2 EleutherAI/pythia-1b --corpus-path "monology/pile-uncopyrighted" --name-tag "10kpile-2.0" 
 
 # python main.py --N 10000 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model2 EleutherAI/pythia-1b --corpus-path "monology/pile-uncopyrighted"  --name-tag "10kpile-3.0" 
 
-python main.py --N 10000 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model2 EleutherAI/pythia-160m --corpus-path "monology/pile-uncopyrighted" --name-tag "10kpile-2.0" 
+# python main.py --N 10000 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model2 EleutherAI/pythia-160m --corpus-path "monology/pile-uncopyrighted" --name-tag "10kpile-2.0" 
 
-python main.py --N 10000 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model2 EleutherAI/pythia-160m --corpus-path "monology/pile-uncopyrighted" --name-tag "10kpile-3.0" 
+# python main.py --N 10000 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model2 EleutherAI/pythia-160m --corpus-path "monology/pile-uncopyrighted" --name-tag "10kpile-3.0" 
 
 
 
