@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # Use the variable for the job name and log/error files
-#$ -N miss-mamba
-#$ -o /exports/eddie/scratch/s2558433/job_runs/miss-$JOB_ID.log
-#$ -e /exports/eddie/scratch/s2558433/job_runs/miss-$JOB_ID.err
+#$ -N base-mamba
+#$ -o /exports/eddie/scratch/s2558433/job_runs/basem-$JOB_ID.log
+#$ -e /exports/eddie/scratch/s2558433/job_runs/basem-$JOB_ID.err
 #$ -cwd
 #$ -q gpu
 #$ -pe gpu-a100 1
@@ -32,11 +32,14 @@ module load anaconda
 cd /exports/eddie/scratch/s2558433/ArchitectureExtraction/
 conda activate mambafour
 
-python main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-130m-hf --corpus-path "monology/pile-uncopyrighted" --name-tag "10kpile-3" --is-mamba
 
-python main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-370m-hf --corpus-path "monology/pile-uncopyrighted" --name-tag "10kpile-3" --is-mamba
+python main.py --N 100 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-130m-hf --corpus-path 'KaiNylund/WMT-year-splits' --split "2021_train" --name-tag 10k-baseline --is-wmt --is-mamba
 
-python main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-790m-hf --corpus-path "monology/pile-uncopyrighted" --name-tag "10kpile-3" --is-mamba
+python main.py --N 100 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-790m-hf --corpus-path 'KaiNylund/WMT-year-splits' --split "2021_train" --name-tag 10k-baseline --is-wmt --is-mamba
+
+python main.py --N 100 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-1.4b-hf --corpus-path 'KaiNylund/WMT-year-splits' --split "2021_train" --name-tag 10k-baseline --is-wmt --is-mamba
+
+python main.py --N 100 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-2.8b-hf --corpus-path 'KaiNylund/WMT-year-splits' --split "2021_train" --name-tag 10k-baseline --is-wmt --is-mamba
 
 
 conda deactivate 
