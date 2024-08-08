@@ -29,6 +29,8 @@ module load cuda/12.1.1
 source /exports/eddie/scratch/s2558433/miniconda3/etc/profile.d/conda.sh
 module load anaconda
 
+conda create -n mambafour python=3.10
+
 
 cd /exports/eddie/scratch/s2558433/ArchitectureExtraction/
 conda activate mambafour
@@ -50,15 +52,17 @@ conda activate mambafour
 
 # python main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-130m-hf --corpus-path "ArmelR/the-pile-splitted" --corpus-subset "PubMed Central" --name-tag "10kpubc-input-150" --is-mamba --is-splitted #--input-len 450
 
-python main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-130m-hf --corpus-path "ArmelR/the-pile-splitted" --corpus-subset "Enron Emails" --name-tag "10kenron-input-150" --is-mamba --is-splitted #--input-len 450
+python main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-130m-hf --corpus-path "ArmelR/the-pile-splitted" --corpus-subset "StackExchange" --name-tag "10kstack-input-150" --is-mamba --is-splitted #--input-len 450
 
-python main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-130m-hf --corpus-path "ArmelR/the-pile-splitted" --corpus-subset "Wikipedia (en)" --name-tag "10kwiki-input-150" --is-mamba --is-splitted #--input-len 450
+python main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-130m-hf --corpus-path "ArmelR/the-pile-splitted" --corpus-subset "Ubuntu IRC" --name-tag "10kubu-input-150" --is-mamba --is-splitted 
+
+#--input-len 450
 
 # python main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-130m-hf --corpus-path "ArmelR/the-pile-splitted" --corpus-subset "Gutenberg (PG-19)" --name-tag "10kgutenberg-input-150" --is-mamba --is-splitted #--input-len 450
 
 # python main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-130m-hf --corpus-path "ArmelR/the-pile-splitted" --corpus-subset "DM Mathematics" --is-mamba --name-tag "10kDM-input-150" --is-splitted #--input-len 450
 
-python main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-130m-hf --corpus-path "ArmelR/the-pile-splitted" --corpus-subset "Github" --name-tag "10kgit-input-150" --is-mamba --is-splitted #--input-len 450
+python main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-2.8b-hf --model2 state-spaces/mamba-130m-hf --corpus-path "ArmelR/the-pile-splitted" --corpus-subset "Pile-CC" --name-tag "10kcc-input-150" --is-mamba --is-splitted #--input-len 450
 
 
 
