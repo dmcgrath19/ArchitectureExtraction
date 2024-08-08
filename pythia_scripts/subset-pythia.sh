@@ -5,6 +5,7 @@
 #$ -o /exports/eddie/scratch/s2558433/job_runs/SUBPY-$JOB_ID.log
 #$ -e /exports/eddie/scratch/s2558433/job_runs/SUBPY-$JOB_ID.err
 #$ -cwd
+#$ -l rl9=true
 #$ -q gpu
 #$ -pe gpu-a100 1
 #$ -l h_vmem=500G
