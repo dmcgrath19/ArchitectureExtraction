@@ -34,13 +34,14 @@ cd /exports/eddie/scratch/s2558433/ArchitectureExtraction/
 conda activate rwkv
 
 
-python main.py --N 10000 --batch-size 10 --model1 EleutherAI/gpt-neo-2.7B --model2 EleutherAI/gpt-neo-2.7B --corpus-path "monology/pile-uncopyrighted" --name-tag "10kpile"  
 
-python main.py --N 10000 --batch-size 10 --model1 EleutherAI/gpt-neo-2.7B --model2 EleutherAI/gpt-neo-1.3B --corpus-path "monology/pile-uncopyrighted" --name-tag "10kpile" 
+python main.py --N 10000 --batch-size 10 --model1 EleutherAI/gpt-neo-2.7B --model2 EleutherAI/gpt-neo-1.3B --corpus-path "monology/pile-uncopyrighted" --name-tag "10kpilew" 
 
-python main.py --N 10000 --batch-size 10 --model1 EleutherAI/gpt-neo-2.7B --model2 EleutherAI/gpt-neo-2.7B --corpus-path "monology/pile-uncopyrighted" --name-tag "10kpilea" 
+python main.py --N 10000 --batch-size 10 --model1 EleutherAI/gpt-neo-2.7B --model2 EleutherAI/gpt-neo-2.7B --corpus-path "monology/pile-uncopyrighted" --name-tag "10kpilew"  
 
-python main.py --N 10000 --batch-size 10 --model1 EleutherAI/gpt-neo-2.7B --model2 EleutherAI/gpt-neo-1.3B --corpus-path "monology/pile-uncopyrighted" --name-tag "10kpilea" 
+python main.py --N 10000 --batch-size 10 --model1 EleutherAI/gpt-neo-2.7B --model2 EleutherAI/gpt-neo-1.3B --corpus-path "monology/pile-uncopyrighted" --name-tag "10kpilec" 
+
+python main.py --N 10000 --batch-size 10 --model1 EleutherAI/gpt-neo-2.7B --model2 EleutherAI/gpt-neo-2.7B --corpus-path "monology/pile-uncopyrighted" --name-tag "10kpilec" 
 
 
 
