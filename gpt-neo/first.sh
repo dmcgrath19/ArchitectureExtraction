@@ -40,7 +40,7 @@ python main.py --N 10000 --batch-size 10 --model1 EleutherAI/gpt-neo-2.7B --mode
 
 python main.py --N 10000 --batch-size 10 --model1 EleutherAI/gpt-neo-2.7B --model2 EleutherAI/gpt-neo-2.7B --corpus-path "monology/pile-uncopyrighted" --name-tag "10kpile" 
 
-python main.py --N 10000 --batch-size 10 --model1 EleutherAI/gpt-neo-2.3B --model2 EleutherAI/gpt-neo-1.7B --corpus-path "monology/pile-uncopyrighted" --name-tag "10kpile" 
+python main.py --N 10000 --batch-size 10 --model1 EleutherAI/gpt-neo-2.7B --model2 EleutherAI/gpt-neo-1.3B --corpus-path "monology/pile-uncopyrighted" --name-tag "10kpile" 
 
 
 
