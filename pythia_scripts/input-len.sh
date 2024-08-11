@@ -40,7 +40,12 @@ conda activate pythia
 
 python main.py --N 10000 --batch-size 10 --model1 EleutherAI/pythia-1.4b --model2 EleutherAI/pythia-1.4b --corpus-path "monology/pile-uncopyrighted" --name-tag "10kpile" 
 
-python main.py --N 10000 --batch-size 10 --model1 EleutherAI/pythia-160m --model2 EleutherAI/pythia-1.4b --corpus-path "monology/pile-uncopyrighted" --name-tag "10kpile" 
+python main.py --N 10000 --batch-size 10 --model1 EleutherAI/pythia-1.4b --model2 EleutherAI/pythia-1.4b --corpus-path "monology/pile-uncopyrighted" --name-tag "10kpilec" 
+
+python main.py --N 10000 --batch-size 10 --model1 EleutherAI/pythia-1.4b --model2 EleutherAI/pythia-410m --corpus-path "monology/pile-uncopyrighted" --name-tag "10kpilea" 
+
+python main.py --N 10000 --batch-size 10 --model1 EleutherAI/pythia-1.4b --model2 EleutherAI/pythia-410m --corpus-path "monology/pile-uncopyrighted" --name-tag "10kpileb" 
+
 
 # python main.py --N 10000 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model2 EleutherAI/pythia-2.8b --corpus-path "monology/pile-uncopyrighted" --name-tag "10kpile" 
 
