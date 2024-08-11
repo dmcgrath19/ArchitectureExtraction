@@ -36,9 +36,9 @@ conda activate mambafour
 
 python main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-370m-hf --model2 state-spaces/mamba-370m-hf  --corpus-path "monology/pile-uncopyrighted" --name-tag "10kpile-3" --is-mamba
 
-python main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-370m-hf --model2 state-spaces/mamba-370m-hf  --corpus-path "monology/pile-uncopyrighted" --name-tag "10kpile-3" --is-mamba
+python main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-370m-hf --model2 state-spaces/mamba-370m-hf  --corpus-path "monology/pile-uncopyrighted" --name-tag "10kpile-3a" --is-mamba
 
-python main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-790m-hf --model2 state-spaces/mamba-790m-hf  --corpus-path "monology/pile-uncopyrighted" --name-tag "10kpile-3" --is-mamba
+python main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-790m-hf --model2 state-spaces/mamba-790m-hf  --corpus-path "monology/pile-uncopyrighted" --name-tag "10kpile-3a" --is-mamba
 
 python main.py --N 10000 --batch-size 10 --model1 state-spaces/mamba-790m-hf --model2 state-spaces/mamba-790m-hf  --corpus-path "monology/pile-uncopyrighted" --name-tag "10kpile-3" --is-mamba
 
