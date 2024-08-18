@@ -111,9 +111,8 @@ def main(args):
                 #inputs = tokenizer(input_ids, return_tensors="pt")
 
                 # Forward pass
-                input_ids_tensor = torch.stack(input_ids).to(device)
+                output_sequences = model1.generate(input_ids=inputs['input_ids'], max_new_tokens=input_len + seq_len)
 
-                output_sequences = model1(input_ids=input_ids_tensor)
 
                 # output_sequences = model1.generate(
                 #     input_ids=inputs['input_ids'].to(device),
