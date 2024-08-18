@@ -109,7 +109,7 @@ def main(args):
         
             if "rwkv" in args.model1:
                 #inputs = tokenizer(input_ids, return_tensors="pt")
-
+                
                 # Forward pass
                 output_sequences = model1.generate(input_ids=prompt_ids['input_ids'], max_new_tokens=input_len + seq_len)
 
