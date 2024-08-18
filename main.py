@@ -111,7 +111,7 @@ def main(args):
                 #inputs = tokenizer(input_ids, return_tensors="pt")
 
                 # Forward pass
-                output_sequences = model1.generate(input_ids=inputs['input_ids'], max_new_tokens=input_len + seq_len)
+                output_sequences = model1.generate(input_ids=prompt_ids['input_ids'], max_new_tokens=input_len + seq_len)
 
 
                 # output_sequences = model1.generate(
