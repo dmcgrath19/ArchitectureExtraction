@@ -108,14 +108,17 @@ def main(args):
             print("Attention Mask shape:", inputs['attention_mask'].shape)
         
             if "rwkv" in args.model1:
-                output_sequences = model1.generate(
-                    input_ids=inputs['input_ids'].to(device),
-                    
-                    max_length=input_len + seq_len,
-                    do_sample=True, 
-                    top_k=top_k, 
-                    top_p=1.0
-                )
+                inputs = tokenizer(input_ids, return_tensors="pt")
+
+                # Forward pass
+                output_sequences = model1(**inputs)
+
+                # output_sequences = model1.generate(
+                #     input_ids=inputs['input_ids'].to(device),
+                #     max_length=input_len + seq_len,
+                #     top_k=top_k, 
+                #     top_p=1.0
+                # )
             else:
                 output_sequences = model1.generate(
                     input_ids=inputs['input_ids'].to(device),
