@@ -112,7 +112,7 @@ def main(args):
                 attention_mask=inputs['attention_mask'].to(device),
                 max_length=input_len + seq_len,
                 do_sample=True, 
-                # top_k=top_k, 
+                top_k=top_k, 
                 top_p=1.0
             )
 
@@ -124,6 +124,7 @@ def main(args):
                 zlib_entropy = len(zlib.compress(bytes(text, 'utf-8')))
                 
                 samples.append(text)
+                print(text)
                 
                 
                 scores["XL"].append(p1.cpu())
