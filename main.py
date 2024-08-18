@@ -108,10 +108,10 @@ def main(args):
             print("Attention Mask shape:", inputs['attention_mask'].shape)
         
             if "rwkv" in args.model1:
-                inputs = tokenizer(input_ids, return_tensors="pt")
+                #inputs = tokenizer(input_ids, return_tensors="pt")
 
                 # Forward pass
-                output_sequences = model1(**inputs)
+                output_sequences = model1(**inputs['input_ids'])
 
                 # output_sequences = model1.generate(
                 #     input_ids=inputs['input_ids'].to(device),
