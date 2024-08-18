@@ -5,9 +5,18 @@ import torch
 import zlib
 import csv
 from datasets import load_dataset
-from transformers import MambaForCausalLM, AutoTokenizer, AutoModelForCausalLM
+from transformers import MambaForCausalLM, AutoTokenizer, AutoModelForCausalLM, StoppingCriteria
 from tqdm import tqdm
 from model_utils import calculate_perplexity, print_best, parse_pilecorpus, parse_splitted, parse_wmt_splitted, parse_local, device
+
+class RwkvStoppingCriteria(StoppingCriteria):
+    def __init__(self, eos_sequence = [187,187], eos_token_id = 537):
+        self.eos_sequence = eos_sequence
+        self.eos_token_id = eos_token_id
+    def __call__(self, input_ids: torch.LongTensor, scores: torch.FloatTensor, **kwargs) -> bool:
+        last_2_ids = input_ids[:,-2:].tolist()
+        return self.eos_sequence in last_2_ids
+
 
 def main(args):
     print(f"Using device: {device}")
@@ -111,7 +120,8 @@ def main(args):
                 #inputs = tokenizer(input_ids, return_tensors="pt")
                 
                 # Forward pass
-                output_sequences = model1.generate(input_ids=inputs['input_ids'].to(device), max_new_tokens=input_len + seq_len)
+                output_sequences = model1.generate(input_ids=inputs['input_ids'].to(device), max_new_tokens=input_len + seq_len
+                                                   , stopping_criteria = [RwkvStoppingCriteria()])
 
 
                 # output_sequences = model1.generate(
