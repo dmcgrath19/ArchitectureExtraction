@@ -33,7 +33,8 @@ cd /exports/eddie/scratch/s2558433/ArchitectureExtraction/
 
 conda activate rwkv
 
-# python suffix.py --model_name RWKV/rwkv-4-1b5-pile --input_csv output_scores_EleutherAI_gpt-neo-2.7B_EleutherAI_gpt-neo-1.3B_10kpileg.csv
-# python suffix.py --model_name RWKV/rwkv-4-169m-pile --input_csv output_scores_EleutherAI_gpt-neo-2.7B_EleutherAI_gpt-neo-1.3B_10kpileg.csv
+# python suffix.py --model_name RWKV/rwkv-4-1b5-pile --input_csv output_scores_state-spaces_mamba-790m-hf_state-spaces_mamba-790m-hf_10kpile-3.csv
+# python suffix.py --model_name RWKV/rwkv-4-169m-pile --input_csv output_scores_state-spaces_mamba-790m-hf_state-spaces_mamba-790m-hf_10kpile-3.csv
 
-python suffix.py --model_name RWKV/rwkv-4-430m-pile --input_csv output_scores_EleutherAI_gpt-neo-2.7B_EleutherAI_gpt-neo-1.3B_10kpileg.csv
+python suffix.py --model_name RWKV/rwkv-4-430m-pile --input_csv output_scores_state-spaces_mamba-790m-hf_state-spaces_mamba-790m-hf_10kpile-3.csv
+python suffix.py --model_name RWKV/rwkv-4-3b-pile --input_csv output_scores_state-spaces_mamba-790m-hf_state-spaces_mamba-790m-hf_10kpile-3.csv
