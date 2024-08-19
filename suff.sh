@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Use the variable for the job name and log/error files
-#$ -N rkvw-3b
+#$ -N rkvw-1b5
 #$ -o /exports/eddie/scratch/s2558433/job_runs/rwkv-$JOB_ID.log
 #$ -e /exports/eddie/scratch/s2558433/job_runs/rwkv-$JOB_ID.err
 #$ -cwd
@@ -33,5 +33,7 @@ cd /exports/eddie/scratch/s2558433/ArchitectureExtraction/
 
 conda activate rwkv
 
-python suffix.py --model_name RWKV/rwkv-4-3b-pile --input_csv output_scores_EleutherAI_gpt-neo-2.7B_EleutherAI_gpt-neo-1.3B_10kpileg.csv
+python suffix.py --model_name RWKV/rwkv-4-1b5-pile --input_csv output_scores_EleutherAI_gpt-neo-2.7B_EleutherAI_gpt-neo-1.3B_10kpileg.csv
+python suffix.py --model_name RWKV/rwkv-4-169m-pile --input_csv output_scores_EleutherAI_gpt-neo-2.7B_EleutherAI_gpt-neo-1.3B_10kpileg.csv
 
+# python suffix.py --model_name RWKV/rwkv-4-430m-pile --input_csv output_scores_EleutherAI_gpt-neo-2.7B_EleutherAI_gpt-neo-1.3B_10kpileg.csv
