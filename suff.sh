@@ -33,5 +33,5 @@ cd /exports/eddie/scratch/s2558433/ArchitectureExtraction/
 
 conda activate rwkv
 
-python rwkv.py --model_name RWKV/rwkv-4-3b-pile --input_csv output_scores_EleutherAI_gpt-neo-2.7B_EleutherAI_gpt-neo-1.3B_10kpileg.csv
+python suffix.py --model_name RWKV/rwkv-4-3b-pile --input_csv output_scores_EleutherAI_gpt-neo-2.7B_EleutherAI_gpt-neo-1.3B_10kpileg.csv
 
