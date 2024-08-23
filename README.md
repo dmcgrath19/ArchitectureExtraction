@@ -4,9 +4,9 @@
 
 To evaluate this on a cluster, be sure to clone this repository
 
-```git clone https://github.com/pchaitanya21/base_extraction_implementaion.git```
+```git clone https://github.com/dmcgrath19/ArchitectureExtraction.git```
 
-```cd base_architecture_extraction```
+```cd ArchitectureExtraction```
 
 then install dependencies
 
