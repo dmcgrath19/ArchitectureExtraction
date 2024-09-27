@@ -1,117 +1,37 @@
-# Base Architecture Extraction from Carlini
+# Master’s Dissertation Experiments: Training Data Memorization in LLMs
 
-## Overview of structure
+This repository contains code for the prefix experiments conducted as the first part of my master’s dissertation, comparing training data memorization between different deep learning architectures—specifically SSMs (Structured State Space Models) and transformers. Mamba and Pythia models were chosen as representatives from the respective architectures due to size and training comparability.
 
-To evaluate this on a cluster, be sure to clone this repository
+The experiments are based on the work of [Carlini](https://github.com/ftramer/LM_Memorization), aiming to extend their analysis by examining factors such as model size, input length, and data type across architectures. The objective is to assess how these factors affect memorization trends across architectures.
 
-```git clone https://github.com/dmcgrath19/ArchitectureExtraction.git```
+## Overview
 
-```cd ArchitectureExtraction```
+### Experiments Conducted
+- **Comparison of Model Sizes**: Different model sizes were used to explore the relationship between model capacity and memorization.
+- **Input Length Variations**: We tested different input lengths to understand the effect of context length on memorization behavior.
+- **Data Type**: The experiments utilized subsets from *The Pile* dataset, comparing how different data types impact memorization rates.
 
-then install dependencies
+The code in this repository is designed to gather outputs from models and store them in CSV format for subsequent analysis. The collected data was further processed to evaluate and compare the memorization characteristics of each model.
 
-```pip install -r requirements.txt```
+## Contents
+- `scripts/`: Scripts used to train models and collect output data.
+- `setup.md`: Detailed setup instructions, including the techniques used to configure and run the scripts.
+- `model_utils.py`: Streams and parses data from hf to be used as samples, calculates perplexity & prints samples from evaluation
+- `main.py`: Loads the models, performs the prefix attack, & stores the response and output per model in a corresponding csv
 
-you may need to create a job script, but here is an example of how to make it run for the perplexity/extraction
+## Getting Started
 
-```python main.py --N 1000 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model2 EleutherAI/pythia-160m --corpus-path monology/pile-uncopyrighted```
+To set up the environment and replicate the experiments, please refer to [setup.md](setup.md). This document provides step-by-step instructions and describes the techniques used to configure and execute the scripts.
 
-## For Running Job Script on the Eddie Cluster
-(Think the cirus uses slurm so just has slightly different .sh file and submit through sbatch)
+### Requirements
+- Python 3.9>
+- Required libraries: [list libraries here or provide details in `setup.md`]
+- Model checkpoints: Download links or paths (as mentioned in `setup.md`)
 
-### ssh into the cluster: 
-
-``` ssh s1234567@eddie.ecdf.ed.ac.uk``` 
-
-### navigate to your scratch space
-
-```cd /exports/eddie/scratch/s1234567```
-
-### create/overwrite job script
-
-#### Nano 
-```nano job_script.sh```
-
-paste/edit the script (sample script is included as eddie_job.sh)
-
-### Save & Exit
-
-Press `Ctrl + O` to save the file.
-Press `Enter` to confirm the file name.
-Press `Ctrl + X` to exit nano
+### Running the Scripts
+1. **Setup Environment**: Follow the instructions in [setup.md](setup.md) to set up the required environment.
+2. **Run Experiments**: Use the scripts in `scripts/` to run model comparisons.
 
 
-#### Vim
-
-```vim job_script.sh```
-
-insert/make changes 
-`i`
-
-Normal mode `esc` 
-
-Save & Exit:  `:wq` and press `Enter`
-Force Quit w/o saving: `:q!`
-
-(if you cannot exit try clickig `esc` first to put you in normal mode)
-
-### Submit the Script 
-
-```qsub job_script.sh```
-
-```qsub -l h_rt=H:M:S jobscript.sh``` (instead of including the limitations in your script you can also just include them on the command line instead)
-
-```sbatch cirus_script.sh```
-
-### Copying a file from the cluster to local 
-
-Sample, make sure that you are **NOT** logged into SSH. If you are open another locally or logout and then try. 
-```scp <youruun>@eddie.ecdf.ed.ac.uk:myfile.txt /some/local/directory```
-
-Ex: 
-```scp s2558433@eddie.ecdf.ed.ac.uk:/exports/eddie/scratch/s2558433/base_extraction_implementaion/output_scores_EleutherAI_pythia-2.8b_EleutherAI_pythia-160m.csv /Users/deals/Desktop```
-
-### More ways for Transfering data to and from Eddie
-Found [here](https://www.geos.ed.ac.uk/~smudd/LSDTT_docs/html/edin_instructions.html), it has more documentation for running scripts/all sorts of commands for Eddie Cluster
-
-You need to copy all the files needed to run your job on Eddie. To copy to and from the cluster, you need to use the secure copy command scp. Some examples of syntax are given below:
-
-Copy the file “myfile.txt” from your computer (the local host) to Eddie (the remote host):
-
-```scp myfile.txt <youruun>@eddie.ecdf.ed.ac.uk:/some/remote/directory```
-Copy the file “myfile.txt” from Eddie to the local host:
-
-```scp <youruun>@eddie.ecdf.ed.ac.uk:myfile.txt /some/local/directory```
-Copy the directory “mydir” from the local host to a remote host’s directory “fardir”:
-
-```scp -r mydir <youruun>@eddie.ecdf.ed.ac.uk:/some/remote/directory/fardir```
-Copy multiple files from the remote host to your current directory on the local host:
-
-```scp <youruun>@eddie.ecdf.ed.ac.uk:~/\{myfile1.txt,myfile2.txt\}```
-
- .
-More examples can be found at http://www.hypexr.org/linux_scp_help.php. If a command is not working on Eddie, try it on the local host instead.
-
-*****
-
-For the Mamba enviornment(that worked):
-
-conda create -n mambafour python=3.10
-
-conda activate mambafour
-
- conda install -c conda-forge gcc_linux-64 gxx_linux-64
-
-pip3 install torch torchvision torchaudio
-pip install transformers==4.41.0
-pip install --upgrade pip
-
-pip install numpy tqdm zstandard
-pip install datasets
-pip install --upgrade datasets
-
-pip install causal-conv1d==1.4.0
-pip install mamba-ssm==2.2.2
-
-
-(The new transformers version 4.42.3 seems to cause errors when setting attention mask & trying with a higher python version caused dependency conflicts? This method worked ^)
+## Acknowledgments
+This work builds upon the foundational research of Carlini et al., whose contributions to understanding memorization in LLMs served as a basis for these experiments.
