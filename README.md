@@ -1,4 +1,4 @@
-# Master’s Dissertation Experiments: Training Data Memorization in LLMs
+# Training Data Memorization in LLMs
 
 This repository contains code for the prefix experiments conducted as the first part of my master’s dissertation, comparing training data memorization between different deep learning architectures—specifically SSMs (Structured State Space Models) and transformers. Mamba and Pythia models were chosen as representatives from the respective architectures due to size and training comparability.
 
